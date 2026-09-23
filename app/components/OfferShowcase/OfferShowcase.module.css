@@ -1,0 +1,290 @@
+.section {
+  width: 100%;
+  padding: 0 0 52px;
+  overflow: hidden;
+  background: transparent;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: 32px;
+  width: min(
+    calc(100% - (var(--page-gutter, 48px) * 2)),
+    var(--container-max, 1280px)
+  );
+  margin-inline: auto;
+}
+
+.intro {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  min-width: 0;
+  padding-top: 28px;
+}
+
+.title {
+  max-width: 460px;
+  margin: 0;
+  color: var(--color-navy, #0f2c3c);
+  font-family: var(--font-italic), serif;
+  font-size: clamp(44px, 4.25vw, 64px);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.03;
+  letter-spacing: -0.045em;
+}
+
+.title span {
+  display: block;
+  white-space: nowrap;
+}
+
+.description {
+  max-width: 390px;
+  margin: 18px 0 0;
+  color: rgba(15, 44, 60, 0.76);
+  font-family: var(--font-body), sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  margin-top: 24px;
+  padding: 11px 28px;
+  border: 1px solid var(--color-navy, #0f2c3c);
+  border-radius: 999px;
+  background: var(--color-navy, #0f2c3c);
+  color: #ffffff;
+  font-family: var(--font-body), sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+  transition: background-color 180ms ease, border-color 180ms ease;
+}
+
+.cta:hover {
+  border-color: var(--color-blue, #537799);
+  background: var(--color-blue, #537799);
+}
+
+.controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.controls button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--color-navy, #0f2c3c);
+  border-radius: 50%;
+  background: var(--color-navy, #0f2c3c);
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.controls button:hover {
+  border-color: var(--color-blue, #537799);
+  background: var(--color-blue, #537799);
+  color: #ffffff;
+}
+
+.controls button:disabled {
+  opacity: 0.28;
+  cursor: not-allowed;
+}
+
+.controls svg {
+  width: 22px;
+  height: 22px;
+}
+
+.cta:focus-visible,
+.offerCard:focus-visible {
+  outline: 2px solid var(--color-orange, #f2ac2a);
+  outline-offset: 3px;
+}
+
+.controls button:focus-visible {
+  outline: 2px solid var(--color-blue, #537799);
+  outline-offset: 3px;
+}
+
+.gallery {
+  min-width: 0;
+}
+
+.track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(300px, 48.5%);
+  gap: 10px;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.offerCard {
+  position: relative;
+  display: block;
+  aspect-ratio: 0.68;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  scroll-snap-align: start;
+  background: #d9e0e4;
+  color: #ffffff;
+}
+
+.image {
+  object-fit: cover;
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.offerCard:hover .image {
+  transform: scale(1.035);
+}
+
+.discountTag {
+  position: absolute;
+  z-index: 2;
+  top: 14px;
+  right: 14px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  background: var(--color-orange, #f2ac2a);
+  color: var(--color-navy, #0f2c3c);
+  font-family: var(--font-body), sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(8, 25, 35, 0.76), transparent 56%);
+}
+
+.offerCard h3 {
+  position: absolute;
+  z-index: 1;
+  right: 18px;
+  bottom: 18px;
+  left: 18px;
+  max-width: 290px;
+  margin: 0;
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(19px, 1.75vw, 25px);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+@media (max-width: 1024px) {
+  .section {
+    padding: 0 0 44px;
+  }
+
+  .container {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: 24px;
+  }
+
+  .track {
+    grid-auto-columns: minmax(280px, 82%);
+    gap: 10px;
+  }
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding: 0 0 36px;
+  }
+
+  .container {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .intro {
+    padding-top: 16px;
+  }
+
+  .title {
+    max-width: 330px;
+    font-size: clamp(32px, 8.5vw, 38px);
+  }
+
+  .description {
+    margin-top: 14px;
+    font-size: 12px;
+  }
+
+  .cta {
+    height: 46px;
+    margin-top: 20px;
+    padding-inline: 22px;
+  }
+
+  .controls {
+    margin-top: 14px;
+  }
+
+  .controls button {
+    width: 38px;
+    height: 38px;
+  }
+
+  .controls svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .track {
+    grid-auto-columns: 84%;
+    gap: 10px;
+  }
+
+  .offerCard {
+    aspect-ratio: 0.76;
+    border-radius: 8px;
+  }
+
+  .discountTag {
+    top: 11px;
+    right: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    scroll-behavior: auto;
+  }
+
+  .image,
+  .cta,
+  .controls button {
+    transition: none;
+  }
+}

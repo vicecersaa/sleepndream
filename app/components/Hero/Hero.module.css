@@ -1,0 +1,586 @@
+
+/* =========================================
+   SLEEP N DREAM — HERO
+========================================= */
+
+.section {
+  width: 100%;
+  padding: 14px 0 0;
+  background: var(--color-background);
+}
+
+.container {
+  width: min(
+    calc(100% - (var(--page-gutter) * 2)),
+    var(--container-max)
+  );
+
+  margin-inline: auto;
+}
+
+/* =========================================
+   PROMO BAR
+========================================= */
+
+.promoBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  width: 100%;
+  min-height: 60px;
+
+  gap: 14px 24px;
+  padding: 12px 24px;
+  margin-bottom: 14px;
+
+  border-radius: 10px;
+
+  background: var(--color-navy);
+  color: var(--color-white);
+}
+
+.promoLabel {
+  flex-shrink: 0;
+
+  font-family: var(--font-body), sans-serif;
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.08em;
+
+  color: var(--color-orange);
+  white-space: nowrap;
+}
+
+.promoText {
+  margin: 0;
+
+  font-family: var(--font-body), sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.45;
+
+  color: var(--color-white);
+  text-align: center;
+}
+
+/* =========================================
+   TOMBOL PROMO — TETAP ORANGE
+========================================= */
+
+.promoButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  min-height: 30px;
+  padding: 4px 14px;
+
+  border: 1px solid var(--color-orange);
+  border-radius: 999px;
+
+  background: var(--color-orange);
+  color: var(--color-navy);
+
+  font-family: var(--font-body), sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+
+  text-decoration: none;
+  white-space: nowrap;
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.promoButton:hover {
+  background: #e8a324;
+  border-color: #e8a324;
+  color: var(--color-navy);
+}
+
+.promoLink {
+  flex-shrink: 0;
+
+  font-family: var(--font-body), sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+
+  color: var(--color-white);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+
+  transition: color 180ms ease;
+}
+
+.promoLink:hover {
+  color: var(--color-orange);
+}
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  min-height: 590px;
+
+  overflow: hidden;
+
+  border: none;
+  border-radius: 10px;
+
+  background: var(--color-navy);
+}
+
+/* =========================================
+   IMAGE
+========================================= */
+
+.image {
+  z-index: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center 38%;
+
+  filter: brightness(0.94) contrast(1.02);
+}
+
+/* =========================================
+   IMAGE OVERLAY
+========================================= */
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  background: linear-gradient(
+    90deg,
+    rgba(230, 230, 230, 0.34) 0%,
+    rgba(230, 230, 230, 0.28) 23%,
+    rgba(230, 230, 230, 0.12) 43%,
+    rgba(230, 230, 230, 0.03) 58%,
+    rgba(230, 230, 230, 0) 75%
+  );
+
+  pointer-events: none;
+}
+
+/* =========================================
+   HERO CONTENT
+========================================= */
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  min-height: inherit;
+
+  padding: 48px clamp(28px, 4vw, 56px);
+}
+
+.contentInner {
+  /* Lebih lega supaya judul muat satu baris */
+  width: min(100%, 720px);
+}
+
+/* =========================================
+   EYEBROW
+========================================= */
+
+.eyebrow {
+  display: block;
+  margin-bottom: 16px;
+
+  font-family: var(--font-body), sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+
+  color: var(--color-navy);
+}
+
+/* =========================================
+   TITLE — SATU BARIS DI DESKTOP
+========================================= */
+
+.title {
+  max-width: none;
+  margin: 0 0 20px;
+
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(40px, 3.6vw, 52px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.05em;
+
+  color: var(--color-navy);
+
+  /* Hindari pemenggalan otomatis di desktop */
+  white-space: nowrap;
+  text-wrap: nowrap;
+}
+
+.italic {
+  display: inline-block;
+  font-family: var(--font-italic), serif;
+  font-size: 1.06em;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.055em;
+  vertical-align: baseline;
+
+  color: var(--color-navy);
+}
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.description {
+  max-width: 500px;
+  margin: 0 0 26px;
+
+  font-family: var(--font-body), sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+
+  color: var(--color-navy);
+}
+
+/* =========================================
+   TWO STACKED BUTTONS
+========================================= */
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  /* Sebelumnya 320px — sekarang lebih compact */
+  width: min(100%, 280px);
+  gap: 9px;
+}
+
+.primaryButton,
+.secondaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 18px;
+
+  border: 1px solid var(--color-navy);
+  border-radius: 999px;
+
+  font-family: var(--font-body), sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+
+  text-align: center;
+  text-decoration: none;
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+/* Tombol utama: blue */
+.primaryButton {
+  background: var(--color-navy);
+  color: var(--color-white);
+}
+
+.primaryButton:hover {
+  /* Blue sedikit lebih gelap, bukan navy */
+  background: #456987;
+  border-color: #456987;
+  color: var(--color-white);
+}
+
+/* Tombol kedua: outline blue */
+.secondaryButton {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: var(--color-blue);
+  color: var(--color-blue);
+}
+
+.secondaryButton:hover {
+  /* Hover lembut, tetap dalam keluarga blue */
+  background: rgba(83, 119, 153, 0.14);
+  border-color: var(--color-blue);
+  color: var(--color-blue);
+}
+
+/* =========================================
+   FOCUS
+========================================= */
+
+.primaryButton:focus-visible,
+.secondaryButton:focus-visible,
+.promoButton:focus-visible,
+.promoLink:focus-visible {
+  outline: 3px solid var(--color-orange);
+  outline-offset: 4px;
+}
+
+/* =========================================
+   LARGE DESKTOP
+========================================= */
+
+@media (min-width: 1600px) {
+  .hero {
+    min-height: 640px;
+  }
+
+  .contentInner {
+    width: min(100%, 780px);
+  }
+
+  .title {
+    font-size: 58px;
+  }
+
+  .description {
+    font-size: 18px;
+  }
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1024px) {
+  .section {
+    padding-top: 8px;
+  }
+
+  .promoBar {
+    gap: 10px 16px;
+    padding: 12px 18px;
+  }
+
+  .promoText {
+    font-size: 13px;
+  }
+
+  .hero {
+    min-height: 550px;
+  }
+
+  .heroContent {
+    padding: 40px 32px;
+  }
+
+  .contentInner {
+    width: min(100%, 560px);
+  }
+
+  .title {
+    font-size: clamp(36px, 4.5vw, 46px);
+
+    /* Boleh membungkus jika ruang tablet tidak cukup */
+    white-space: normal;
+    text-wrap: wrap;
+  }
+
+  .description {
+    max-width: 440px;
+    font-size: 16px;
+  }
+
+  .image {
+    object-fit: cover;
+    object-position: center 38%;
+  }
+
+  .imageOverlay {
+    background: linear-gradient(
+      90deg,
+      rgba(230, 230, 230, 0.38) 0%,
+      rgba(230, 230, 230, 0.27) 32%,
+      rgba(230, 230, 230, 0.08) 62%,
+      rgba(230, 230, 230, 0) 88%
+    );
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 767px) {
+  .section {
+    padding-top: 6px;
+  }
+
+  .promoBar {
+    justify-content: center;
+
+    gap: 8px 14px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+
+    border-radius: 8px;
+  }
+
+  .promoLabel {
+    width: 100%;
+    font-size: 11px;
+    text-align: center;
+  }
+
+  .promoText {
+    width: 100%;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .promoButton {
+    min-height: 30px;
+    padding: 4px 14px;
+    font-size: 12px;
+  }
+
+  .promoLink {
+    font-size: 12px;
+  }
+
+  .hero {
+    align-items: flex-start;
+    min-height: 600px;
+    border-radius: 8px;
+  }
+
+  .image {
+    object-fit: cover;
+    object-position: 62% center;
+  }
+
+  .imageOverlay {
+    background: linear-gradient(
+      180deg,
+      rgba(230, 230, 230, 0.52) 0%,
+      rgba(230, 230, 230, 0.4) 33%,
+      rgba(230, 230, 230, 0.14) 65%,
+      rgba(230, 230, 230, 0) 90%
+    );
+  }
+
+  .heroContent {
+    align-items: flex-start;
+    min-height: inherit;
+
+    padding: 34px 24px 175px;
+  }
+
+  .contentInner {
+    width: 100%;
+  }
+
+  .eyebrow {
+    margin-bottom: 14px;
+    font-size: 11px;
+  }
+
+  .title {
+    max-width: 500px;
+    margin-bottom: 16px;
+
+    font-size: clamp(34px, 8vw, 46px);
+    line-height: 1.1;
+
+    white-space: normal;
+    text-wrap: wrap;
+  }
+
+  .description {
+    max-width: 420px;
+    margin-bottom: 22px;
+
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .actions {
+    width: min(100%, 280px);
+    gap: 9px;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    min-height: 42px;
+    padding: 9px 16px;
+    font-size: 13px;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 380px) {
+  .hero {
+    min-height: 580px;
+  }
+
+  .heroContent {
+    padding: 30px 20px 150px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+
+  .actions {
+    width: min(100%, 280px);
+  }
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .promoButton,
+  .promoLink,
+  .primaryButton,
+  .secondaryButton {
+    transition: none;
+  }
+}

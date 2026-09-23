@@ -1,0 +1,819 @@
+
+/* =========================================
+   SLEEP N DREAM — REKOMENDASI KASUR
+========================================= */
+
+.section {
+  width: 100%;
+  padding: 48px 0 40px;
+  background: var(--color-background, #e6e6e6);
+}
+
+.container {
+  width: min(
+    calc(100% - (var(--page-gutter, 48px) * 2)),
+    var(--container-max, 1280px)
+  );
+  margin-inline: auto;
+}
+
+/* =========================================
+   HEADER — JUDUL LEBIH DEKAT KE GAMBAR
+========================================= */
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.title {
+  display: inline-block;
+  width: fit-content;
+  max-width: 100%;
+
+  margin: 0;
+  transform: none;
+
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(23px, 2vw, 29px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+
+  color: var(--color-navy, #0f2c3c);
+  background: transparent;
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+}
+
+.categoryFilters {
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+  flex-shrink: 0;
+  gap: 22px;
+  border-bottom: 1px solid rgba(15, 44, 60, 0.22);
+}
+
+.categoryFilter {
+  position: relative;
+  padding: 0 1px 8px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  background: transparent;
+  color: rgba(15, 44, 60, 0.68);
+  font-family: var(--font-body), sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 180ms ease, border-color 180ms ease;
+}
+
+.categoryFilter:hover,
+.categoryFilterActive {
+  border-bottom-color: var(--color-navy, #0f2c3c);
+  color: var(--color-navy, #0f2c3c);
+}
+
+.categoryFilterActive {
+  font-weight: 700;
+}
+
+.categoryFilter:focus-visible {
+  outline: 2px solid var(--color-orange, #f2ac2a);
+  outline-offset: 3px;
+}
+
+/* =========================================
+   PANAH
+========================================= */
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  align-self: auto;
+  flex-shrink: 0;
+  gap: 8px;
+}
+
+.arrowButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: 36px;
+  height: 36px;
+  padding: 0;
+
+  border: 1px solid var(--color-navy, #0f2c3c);
+  border-radius: 50%;
+  box-shadow: none;
+
+  background: var(--color-navy, #0f2c3c);
+  color: var(--color-white, #ffffff);
+  cursor: pointer;
+
+  transition:
+    color 180ms ease,
+    opacity 180ms ease;
+}
+
+.arrowButton svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+  overflow: visible;
+
+  filter: none;
+  box-shadow: none;
+  transition: transform 180ms ease;
+}
+
+.arrowButton:hover:not(:disabled) {
+  border-color: var(--color-blue, #537799);
+  background: var(--color-blue, #537799);
+  color: var(--color-white, #ffffff);
+}
+
+.arrowButton:hover:not(:disabled) svg {
+  transform: scale(1.08);
+}
+
+.arrowButton:disabled {
+  opacity: 0.28;
+  cursor: not-allowed;
+}
+
+.arrowButton:focus-visible {
+  outline: 2px solid var(--color-blue, #537799);
+  outline-offset: 3px;
+}
+
+/* =========================================
+   SLIDER
+========================================= */
+
+.track {
+  --card-gap: 20px;
+
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc(
+    (100% - (var(--card-gap) * 2)) / 3
+  );
+
+  gap: var(--card-gap);
+  width: 100%;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0 0 4px;
+
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-overflow-scrolling: touch;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+}
+
+.dragging,
+.dragging * {
+  cursor: grabbing !important;
+}
+
+.sliderFooter {
+  margin-top: 32px;
+}
+
+.sliderFooterHidden {
+  display: none;
+}
+
+.scrollTracker {
+  position: relative;
+  width: 100%;
+  height: 4px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(15, 44, 60, 0.14);
+}
+
+.scrollTrackerFill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--color-navy, #0f2c3c);
+  transition: left 180ms var(--ease-standard, ease);
+}
+
+.footerRow {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+/* =========================================
+   PRODUCT CARD
+========================================= */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+
+  color: #111111;
+  scroll-snap-align: start;
+}
+
+/* =========================================
+   PRODUCT IMAGE
+========================================= */
+
+.imageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1.56 / 1;
+
+  overflow: hidden;
+  border-radius: 10px;
+  background: #dbe4ea;
+}
+
+.image {
+  display: block;
+  object-fit: cover;
+  object-position: center;
+
+  user-select: none;
+  -webkit-user-drag: none;
+
+  transition: transform 400ms ease;
+}
+
+.card:hover .image {
+  transform: scale(1.025);
+}
+
+/* =========================================
+   BADGE FOTO
+========================================= */
+
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 25px;
+  max-width: calc(100% - 24px);
+  padding: 5px 10px;
+
+  border-radius: 5px;
+  background: #ffffff;
+  color: #111111;
+
+  font-family: var(--font-body), sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* =========================================
+   PRODUCT CONTENT
+========================================= */
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+
+  min-width: 0;
+  padding-top: 11px;
+}
+
+/* =========================================
+   RATING
+========================================= */
+
+.headingRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.ratingRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  gap: 5px;
+  margin-bottom: 0;
+}
+
+.stars {
+  color: #df9b42;
+  font-size: 13px;
+  line-height: 1;
+  letter-spacing: 1px;
+}
+
+.ratingValue,
+.reviews {
+  font-family: var(--font-body), sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #111111;
+}
+
+.reviews {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* =========================================
+   NAMA PRODUK
+========================================= */
+
+.cardTitle {
+  margin: 0;
+
+  font-family: var(--font-body), sans-serif;
+  font-size: clamp(18px, 1.5vw, 21px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+
+  color: #111111;
+}
+
+.cardTitle a {
+  transition: color 180ms ease;
+}
+
+.cardTitle a:hover {
+  color: var(--color-blue, #537799);
+}
+
+.cardTitle a:focus-visible {
+  outline: 2px solid var(--color-orange, #f2ac2a);
+  outline-offset: 3px;
+}
+
+.description {
+  display: -webkit-box;
+  max-width: 360px;
+  margin: 0 0 10px;
+  overflow: hidden;
+  color: rgba(17, 17, 17, 0.72);
+  font-family: var(--font-body), sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.45;
+  min-height: 2.9em;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+/* =========================================
+   HARGA + DISKON
+========================================= */
+
+.priceRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 8px 10px;
+  width: 100%;
+
+  margin-top: auto;
+  margin-bottom: 10px;
+}
+
+.oldPrice {
+  font-family: var(--font-body), sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.3;
+
+  color: #111111;
+  text-decoration: line-through;
+}
+
+.price {
+  font-family: var(--font-body), sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+
+  color: #111111;
+}
+
+.discountBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 25px;
+  padding: 4px 9px;
+  border-radius: 6px;
+
+  background: #e3eedc;
+  color: #426c36;
+
+  font-family: var(--font-body), sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* =========================================
+   PILIHAN WARNA
+========================================= */
+
+.purchaseRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+
+.swatchSection {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  min-width: 0;
+  margin-bottom: 0;
+}
+
+.swatchList {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.swatch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: 24px;
+  height: 24px;
+  padding: 2px;
+
+  border: 1px solid rgba(17, 17, 17, 0.2);
+  border-radius: 7px;
+
+  background: transparent;
+  cursor: pointer;
+
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.swatchFill {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  border-radius: 4px;
+  border: 1px solid rgba(17, 17, 17, 0.06);
+}
+
+.swatchStripeFill {
+  background: repeating-linear-gradient(
+    90deg,
+    #f2eee5 0px,
+    #f2eee5 4px,
+    #d7c5ad 4px,
+    #d7c5ad 6px
+  );
+}
+
+.swatch:hover {
+  border-color: var(--color-blue, #537799);
+}
+
+.swatchActive {
+  border-color: var(--color-navy, #0f2c3c);
+  box-shadow: 0 0 0 1px var(--color-navy, #0f2c3c);
+}
+
+.swatch:focus-visible {
+  outline: 2px solid var(--color-blue, #537799);
+  outline-offset: 3px;
+}
+
+/* =========================================
+   TOMBOL LIHAT PRODUK
+========================================= */
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+
+  min-height: 36px;
+  padding: 8px 17px;
+
+  border: 1px solid var(--color-navy);
+  border-radius: 999px;
+
+  background: var(--color-navy);
+  color: #E6E6E6;
+
+  font-family: var(--font-body), sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.3;
+
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  margin-top: 0;
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.cta::after {
+  content: "";
+  display: block;
+  flex-shrink: 0;
+
+  width: 7px;
+  height: 7px;
+
+  border-top: 2.4px solid currentColor;
+  border-right: 2.4px solid currentColor;
+
+  transform: rotate(45deg);
+  transition: transform 180ms ease;
+}
+
+.cta:hover {
+  
+  color: #FFFFFF;
+}
+
+.cta:hover::after {
+  transform: translateX(3px) rotate(45deg);
+}
+
+.cta:focus-visible {
+  outline: 2px solid var(--color-blue, #537799);
+  outline-offset: 4px;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1024px) {
+  .section {
+    padding: 40px 0 32px;
+  }
+
+  .track {
+    --card-gap: 16px;
+    grid-auto-columns: calc(
+      (100% - var(--card-gap)) / 2
+    );
+  }
+
+  .imageWrap {
+    aspect-ratio: 1.5 / 1;
+  }
+
+  .cardTitle {
+    font-size: 21px;
+  }
+
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 767px) {
+  .section {
+    padding: 32px 0 28px;
+  }
+
+  .header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .categoryFilters {
+    flex: 1;
+    min-width: 0;
+    gap: 18px;
+    transform: none;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .categoryFilters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .categoryFilter {
+    padding-bottom: 7px;
+    font-size: 12px;
+  }
+
+  .title {
+    max-width: 100%;
+    font-size: clamp(20px, 5.4vw, 25px);
+    -webkit-text-stroke: 0;
+    text-shadow: none;
+  }
+
+  .controls {
+    gap: 8px;
+  }
+
+  .arrowButton {
+    width: 30px;
+    height: 30px;
+  }
+
+  .arrowButton svg {
+    width: 23px;
+    height: 23px;
+    filter: none;
+  }
+
+  .track {
+    --card-gap: 12px;
+    grid-auto-columns: 82%;
+  }
+
+  .imageWrap {
+    aspect-ratio: 1.26 / 1;
+    border-radius: 8px;
+  }
+
+  .badge {
+    top: 10px;
+    left: 10px;
+
+    min-height: 23px;
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+
+  .cardContent {
+    padding-top: 12px;
+  }
+
+  .ratingRow {
+    margin-bottom: 0;
+  }
+
+  .stars {
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  .cardTitle {
+    margin-bottom: 0;
+    font-size: 20px;
+  }
+
+  .priceRow {
+    margin-bottom: 13px;
+  }
+
+  .price {
+    font-size: 15px;
+  }
+
+  .discountBadge {
+    min-height: 23px;
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+
+  .swatchSection {
+    margin-bottom: 0;
+  }
+
+  .swatch {
+    width: 22px;
+    height: 22px;
+  }
+
+  .cta {
+    min-height: 36px;
+    padding: 8px 16px;
+    gap: 10px;
+    font-size: 12px;
+  }
+
+  .cta::after {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 380px) {
+  .title {
+    font-size: 19px;
+  }
+
+  .track {
+    grid-auto-columns: 86%;
+  }
+
+  .cardTitle {
+    font-size: 19px;
+  }
+}
+
+@media (max-width: 767px) {
+  .sliderFooter {
+    margin-top: 20px;
+  }
+
+  .arrowButton {
+    width: 38px;
+    height: 38px;
+  }
+
+  .arrowButton svg {
+    width: 22px;
+    height: 22px;
+  }
+
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    scroll-behavior: auto;
+  }
+
+  .image,
+  .arrowButton,
+  .arrowButton svg,
+  .swatch,
+  .cta,
+  .cta::after {
+    transition: none;
+  }
+}

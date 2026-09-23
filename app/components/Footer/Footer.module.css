@@ -1,0 +1,36 @@
+.footer { width: 100%; margin-top: 48px; background: var(--color-navy, #0f2c3c); color: #fff; }
+.container { width: min(calc(100% - (var(--page-gutter, 48px) * 2)), var(--container-max, 1280px)); margin-inline: auto; }
+.topGrid { display: grid; grid-template-columns: minmax(300px, .78fr) minmax(440px, 1.22fr); align-items: start; gap: clamp(56px, 9vw, 128px); padding: 64px 0 50px; }
+.brandBlock { max-width: 500px; }
+.brandTitle { max-width: 470px; margin: 0; font-family: var(--font-display), sans-serif; font-size: clamp(24px, 2.2vw, 32px); font-weight: 500; line-height: 1.16; letter-spacing: -.035em; }
+.brandTitle em { color: var(--color-orange, #f2ac2a); font-size: 1.04em; }
+.newsletter { align-self: start; }
+.form { display: block; }
+.signupRow { display: grid; grid-template-columns: 1fr auto; min-height: 56px; border: 2px solid rgba(255,255,255,.84); border-radius: 6px; overflow: hidden; }
+.signupRow input { min-width: 0; padding: 0 18px; border: 0; outline: 0; background: transparent; color: #fff; font-size: 14px; }
+.signupRow input::placeholder { color: rgba(255,255,255,.68); }
+.signupRow button { min-width: 104px; padding: 0 20px; border: 0; background: transparent; color: #fff; font-size: 13px; font-weight: 800; text-decoration: underline; text-underline-offset: 4px; text-transform: uppercase; }
+.consent { display: flex; align-items: flex-start; gap: 10px; margin-top: 16px; color: rgba(255,255,255,.7); font-size: 11px; line-height: 1.45; }
+.consent input { flex: 0 0 auto; width: 17px; height: 17px; margin: 0; accent-color: var(--color-orange, #f2ac2a); }
+.navigation { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: clamp(48px, 7vw, 96px); row-gap: 52px; padding: 42px 0 56px; border-top: 1px solid rgba(255,255,255,.18); }
+.linkGroup h3, .contactBlock h3 { margin: 0 0 20px; font-family: var(--font-body), sans-serif; font-size: 16px; font-weight: 700; }
+.linkGroup h3 { padding-bottom: 11px; border-bottom: 2px solid rgba(255,255,255,.32); }
+.linkGroup ul { display: grid; gap: 13px; margin: 0; padding: 0; list-style: none; }
+.linkGroup a, .legalLinks a { color: rgba(255,255,255,.7); font-size: 14px; transition: color 180ms ease; }
+.linkGroup a:hover, .legalLinks a:hover { color: var(--color-orange, #f2ac2a); }
+.contactLink { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 8px 18px; border: 1px solid rgba(255,255,255,.7); border-radius: 999px; color: #fff; font-size: 13px; font-weight: 700; }
+.socials { display: flex; align-items: center; gap: 22px; margin-top: 24px; }
+.socials a { display: grid; place-items: center; color: #fff; transition: color 180ms ease; }
+.socials a:hover { color: var(--color-orange, #f2ac2a); }
+.socials svg { width: 25px; height: 25px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+.socials .fillIcon { fill: currentColor; stroke: none; }
+.bottomBar { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px 0 28px; border-top: 1px solid rgba(255,255,255,.18); }
+.bottomBar p { margin: 0; color: rgba(255,255,255,.58); font-size: 11px; }
+.legalLinks { display: flex; flex-wrap: wrap; gap: 22px; }
+.legalLinks a { font-size: 11px; }
+.srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+@media (max-width: 1100px) { .navigation { column-gap: 42px; } }
+@media (max-width: 960px) { .topGrid { grid-template-columns: .85fr 1.15fr; gap: 40px; } }
+@media (max-width: 700px) { .footer { margin-top: 34px; } .topGrid { grid-template-columns: 1fr; gap: 34px; padding: 46px 0 38px; } .brandTitle { font-size: clamp(25px,7vw,32px); } .navigation { grid-template-columns: 1fr 1fr; gap: 40px 28px; padding: 36px 0 44px; } .contactBlock { grid-column: 1 / -1; grid-row: auto; } .bottomBar { align-items: flex-start; flex-direction: column; gap: 14px; } }
+@media (max-width: 440px) { .navigation { grid-template-columns: 1fr; } .contactBlock { grid-column: auto; grid-row: auto; } .signupRow button { min-width: 82px; padding-inline: 12px; } .legalLinks { gap: 14px; } }
+@media (prefers-reduced-motion: reduce) { .linkGroup a, .legalLinks a, .socials a { transition: none; } }

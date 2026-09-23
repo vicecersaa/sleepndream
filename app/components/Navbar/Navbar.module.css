@@ -1,0 +1,876 @@
+
+/* =========================================
+   SLEEP N DREAM — NAVBAR
+========================================= */
+
+.header {
+  --navbar-height: 80px;
+  --announcement-height: var(--promo-height, 44px);
+  --navy: var(--color-navy, #0f2c3c);
+  --blue: var(--color-blue, #537799);
+  --light-blue: var(--color-light-blue, #78a5cb);
+  --transition: var(--transition-fast, 180ms ease);
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(15, 44, 60, 0.06);
+
+  font-family: var(--font-body), sans-serif;
+  color: var(--navy);
+}
+
+/* =========================================
+   ANNOUNCEMENT — NAVY
+========================================= */
+
+.announcement {
+  width: 100%;
+  min-height: var(--announcement-height);
+
+  background: var(--navy);
+  color: #ffffff;
+}
+
+.announcementInner {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 1fr)
+    minmax(0, 1fr);
+
+  align-items: center;
+
+  min-height: var(--announcement-height);
+  gap: 12px;
+}
+
+/* =========================================
+   ANNOUNCEMENT KIRI
+========================================= */
+
+.announcementMessage {
+  display: flex;
+  align-items: center;
+
+  min-width: 0;
+  gap: 8px;
+
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.announcementLink {
+  flex-shrink: 0;
+
+  color: #ffffff;
+  font-weight: 600;
+
+  text-decoration: underline;
+  text-underline-offset: 3px;
+
+  transition: opacity var(--transition);
+}
+
+.announcementLink:hover {
+  opacity: 0.7;
+}
+
+/* =========================================
+   ANNOUNCEMENT TENGAH
+========================================= */
+
+.announcementCarousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 0;
+  gap: 8px;
+}
+
+.announcementArrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: 24px;
+  height: 30px;
+  padding: 0;
+
+  border: 0;
+  border-radius: 4px;
+
+  background: transparent;
+  color: #ffffff;
+
+  cursor: pointer;
+
+  transition:
+    color var(--transition),
+    background-color var(--transition);
+}
+
+.announcementArrow svg {
+  width: 15px;
+  height: 15px;
+  stroke-width: 1.8;
+}
+
+.announcementArrow:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--light-blue);
+}
+
+.announcementSlide {
+  display: block;
+  min-width: 0;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+
+  color: #ffffff;
+
+  transition: color var(--transition);
+}
+
+.announcementSlide:hover {
+  color: var(--light-blue);
+}
+
+/* =========================================
+   ANNOUNCEMENT KANAN
+========================================= */
+
+.announcementLinks {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  min-width: 0;
+  gap: 22px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+.announcementLinks a {
+  color: #ffffff;
+  font-weight: 600;
+
+  transition: opacity var(--transition);
+}
+
+.announcementLinks a:hover {
+  opacity: 0.7;
+}
+
+/* =========================================
+   NAVBAR UTAMA — TETAP PUTIH
+========================================= */
+
+.navbar {
+  width: 100%;
+  height: var(--navbar-height);
+
+  background: #ffffff;
+  border-bottom: 1px solid rgba(15, 44, 60, 0.07);
+}
+
+.navbarInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  height: 100%;
+  gap: 20px;
+}
+
+/* =========================================
+   LOGO DAN MENU
+========================================= */
+
+.navLeft {
+  display: flex;
+  align-items: center;
+
+  min-width: 0;
+  height: 100%;
+
+  gap: clamp(28px, 3vw, 46px);
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: 190px;
+  height: 64px;
+
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+
+  background: transparent;
+
+  transition: opacity var(--transition);
+}
+
+.logo:hover {
+  opacity: 0.8;
+}
+
+.logoImage {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+  object-position: center;
+
+  background: transparent;
+
+  /* Logo asli tetap navy */
+  filter: none;
+}
+
+/* =========================================
+   MENU DESKTOP
+========================================= */
+
+.desktopNav {
+  display: flex;
+  align-items: center;
+
+  height: 100%;
+  gap: clamp(16px, 1.8vw, 28px);
+}
+
+.navLink {
+  display: inline-flex;
+  align-items: center;
+
+  min-height: 44px;
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+
+  color: var(--navy);
+
+  white-space: nowrap;
+  cursor: pointer;
+
+  transition: color var(--transition);
+}
+
+.navLink:hover,
+.navDropdown[open] > .navLink {
+  color: var(--blue);
+}
+
+/* =========================================
+   DROPDOWN
+========================================= */
+
+.navDropdown {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  height: 100%;
+}
+
+.navDropdown summary {
+  list-style: none;
+}
+
+.navDropdown summary::-webkit-details-marker {
+  display: none;
+}
+
+.dropdownPanel {
+  position: absolute;
+  top: calc(100% - 1px);
+  left: -20px;
+  z-index: 20;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 270px;
+  padding: 10px;
+
+  background: #ffffff;
+
+  border: 1px solid rgba(15, 44, 60, 0.1);
+  border-radius: 0 0 10px 10px;
+
+  box-shadow: 0 16px 32px rgba(15, 44, 60, 0.1);
+}
+
+.dropdownLink {
+  display: flex;
+  align-items: center;
+
+  min-height: 44px;
+  padding: 10px 12px;
+
+  border-radius: 6px;
+
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+
+  color: var(--navy);
+
+  transition:
+    background-color var(--transition),
+    color var(--transition);
+}
+
+.dropdownLink:hover {
+  background: #f3f6f8;
+  color: var(--blue);
+}
+
+/* =========================================
+   IKON KANAN
+========================================= */
+
+.navActions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-shrink: 0;
+
+  gap: 3px;
+}
+
+.iconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: 40px;
+  height: 44px;
+  padding: 0;
+
+  border: 0;
+  border-radius: 6px;
+
+  background: transparent;
+  color: var(--navy);
+
+  cursor: pointer;
+
+  transition:
+    background-color var(--transition),
+    color var(--transition);
+}
+
+.iconButton svg {
+  display: block;
+
+  width: 22px;
+  height: 22px;
+
+  stroke-width: 1.9;
+}
+
+.iconButton:hover {
+  background: #f3f6f8;
+  color: var(--blue);
+}
+
+.menuButton {
+  display: none;
+}
+
+/* =========================================
+   PANEL PENCARIAN
+========================================= */
+
+.searchPanel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 30;
+
+  width: 100%;
+  padding-block: 18px;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid rgba(15, 44, 60, 0.1);
+  box-shadow: 0 16px 30px rgba(15, 44, 60, 0.08);
+}
+
+.searchForm {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  min-height: 54px;
+  gap: 14px;
+  padding: 8px 14px;
+
+  background: #faf7f5;
+
+  border: 1px solid rgba(15, 44, 60, 0.13);
+  border-radius: 8px;
+
+  color: var(--navy);
+}
+
+.searchForm > svg {
+  flex-shrink: 0;
+
+  width: 21px;
+  height: 21px;
+}
+
+.searchForm input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+
+  border: 0;
+  outline: 0;
+
+  background: transparent;
+
+  font-family: var(--font-body), sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+
+  color: var(--navy);
+}
+
+.searchForm input::placeholder {
+  color: rgba(15, 44, 60, 0.55);
+}
+
+.searchForm:focus-within {
+  border-color: var(--blue);
+}
+
+.searchSubmit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  min-height: 38px;
+  padding-inline: 20px;
+
+  border: 0;
+  border-radius: 999px;
+
+  background: var(--navy);
+  color: #ffffff;
+
+  font-family: var(--font-body), sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: background-color var(--transition);
+}
+
+.searchSubmit:hover:not(:disabled) {
+  background: var(--blue);
+}
+
+.searchSubmit:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* =========================================
+   MENU MOBILE
+========================================= */
+
+.mobileMenu {
+  display: none;
+}
+
+/* =========================================
+   FOCUS
+========================================= */
+
+.logo:focus-visible,
+.navLink:focus-visible,
+.dropdownLink:focus-visible,
+.iconButton:focus-visible,
+.announcementArrow:focus-visible,
+.announcement a:focus-visible,
+.mobileMenu a:focus-visible,
+.mobileMenu summary:focus-visible,
+.searchSubmit:focus-visible {
+  outline: 2px solid var(--light-blue);
+  outline-offset: 4px;
+}
+
+/* =========================================
+   SMALL DESKTOP
+========================================= */
+
+@media (max-width: 1200px) {
+  .navLeft {
+    gap: 22px;
+  }
+
+  .desktopNav {
+    gap: 16px;
+  }
+
+  .logo {
+    width: 165px;
+    height: 56px;
+  }
+
+  .navLink {
+    font-size: 14px;
+  }
+
+  .iconButton {
+    width: 38px;
+  }
+
+  .announcementMessage {
+    gap: 6px;
+  }
+
+  .announcementCarousel {
+    gap: 4px;
+  }
+
+  .announcementLinks {
+    gap: 14px;
+  }
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1024px) {
+  .header {
+    --navbar-height: 72px;
+  }
+
+  .navLeft {
+    gap: 18px;
+  }
+
+  .desktopNav {
+    gap: 12px;
+  }
+
+  .navLink {
+    font-size: 13px;
+  }
+
+  .desktopAction {
+    display: none;
+  }
+
+  .announcementMessage,
+  .announcementLinks {
+    display: none;
+  }
+
+  .announcementInner {
+    display: flex;
+    justify-content: center;
+  }
+
+  .announcementCarousel {
+    width: min(100%, 480px);
+    gap: 12px;
+  }
+
+  .announcementSlide {
+    flex: 1;
+    font-size: 13px;
+  }
+}
+
+/* =========================================
+   MOBILE / SMALL TABLET
+========================================= */
+
+@media (max-width: 900px) {
+  .header {
+    --navbar-height: 68px;
+  }
+
+  .desktopNav {
+    display: none;
+  }
+
+  .navLeft {
+    gap: 0;
+  }
+
+  .navbarInner {
+    gap: 12px;
+  }
+
+  .logo {
+    width: 155px;
+    height: 52px;
+  }
+
+  .navActions {
+    gap: 0;
+  }
+
+  .iconButton {
+    width: 40px;
+    height: 44px;
+  }
+
+  .menuButton {
+    display: inline-flex;
+  }
+
+  .announcementCarousel {
+    width: 100%;
+    gap: 6px;
+  }
+
+  .announcementArrow {
+    width: 26px;
+    height: 32px;
+  }
+
+  .announcementSlide {
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  /* =====================================
+     MENU MOBILE — TETAP PUTIH
+  ===================================== */
+
+  .mobileMenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 25;
+
+    display: block;
+    width: 100%;
+
+    max-height: calc(
+      100dvh - var(--announcement-height) - var(--navbar-height)
+    );
+
+    overflow-y: auto;
+    overscroll-behavior: contain;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid rgba(15, 44, 60, 0.1);
+    box-shadow: 0 18px 32px rgba(15, 44, 60, 0.09);
+  }
+
+  .mobileMenuInner {
+    width: min(
+      calc(100% - var(--page-gutter, 20px) * 2),
+      var(--container-max, 1280px)
+    );
+
+    margin-inline: auto;
+    padding-block: 12px 30px;
+  }
+
+  .mobileLink {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    min-height: 62px;
+    padding: 12px 0;
+
+    border: 0;
+    border-bottom: 1px solid rgba(15, 44, 60, 0.1);
+
+    background: transparent;
+
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.3;
+
+    color: var(--navy);
+    cursor: pointer;
+  }
+
+  .mobileDropdown summary {
+    list-style: none;
+  }
+
+  .mobileDropdown summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobilePlus {
+    position: relative;
+    flex-shrink: 0;
+
+    width: 16px;
+    height: 16px;
+  }
+
+  .mobilePlus::before,
+  .mobilePlus::after {
+    content: "";
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    background: currentColor;
+    transform: translate(-50%, -50%);
+
+    transition: transform var(--transition);
+  }
+
+  .mobilePlus::before {
+    width: 14px;
+    height: 2px;
+  }
+
+  .mobilePlus::after {
+    width: 2px;
+    height: 14px;
+  }
+
+  .mobileDropdown[open] .mobilePlus::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  .mobileSubmenu {
+    display: flex;
+    flex-direction: column;
+
+    padding: 8px 0 14px 16px;
+
+    border-bottom: 1px solid rgba(15, 44, 60, 0.1);
+  }
+
+  .mobileSubmenu a {
+    display: flex;
+    align-items: center;
+
+    min-height: 42px;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    color: var(--navy);
+  }
+
+  .mobileSubmenu a:hover {
+    color: var(--blue);
+  }
+
+  .mobileMenuFooter {
+    display: flex;
+    flex-direction: column;
+
+    gap: 18px;
+    padding-top: 26px;
+  }
+
+  .mobileMenuFooter a {
+    font-size: 14px;
+    font-weight: 500;
+
+    color: var(--navy);
+  }
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+  .logo {
+    width: 130px;
+    height: 44px;
+  }
+
+  .iconButton {
+    width: 38px;
+    height: 42px;
+  }
+
+  .iconButton svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .announcementSlide {
+    font-size: 11px;
+  }
+
+  .searchPanel {
+    padding-block: 12px;
+  }
+
+  .searchForm {
+    gap: 10px;
+    padding: 8px 10px;
+  }
+
+  .searchForm input {
+    font-size: 12px;
+  }
+
+  .searchSubmit {
+    padding-inline: 14px;
+    font-size: 12px;
+  }
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .header *,
+  .header *::before,
+  .header *::after {
+    transition: none !important;
+  }
+}
