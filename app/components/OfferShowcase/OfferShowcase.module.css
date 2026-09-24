@@ -8,7 +8,7 @@
 .container {
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-  gap: 32px;
+  gap: clamp(44px, 4vw, 56px);
   width: min(
     calc(100% - (var(--page-gutter, 48px) * 2)),
     var(--container-max, 1280px)
@@ -208,7 +208,7 @@
 
   .container {
     grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-    gap: 24px;
+    gap: 36px;
   }
 
   .track {
@@ -224,7 +224,7 @@
 
   .container {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 28px;
   }
 
   .intro {
