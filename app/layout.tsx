@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import {
   Bricolage_Grotesque,
   Be_Vietnam_Pro,
-  Lora,
 } from "next/font/google";
 
 import Navbar from "./components/Navbar/Navbar";
@@ -23,14 +22,6 @@ const beVietnam = Be_Vietnam_Pro({
   variable: "--font-be-vietnam",
 });
 
-const lora = Lora({
-  subsets: ["latin"],
-  weight: ["500", "600"],
-  style: ["italic"],
-  display: "swap",
-  variable: "--font-lora",
-});
-
 export const metadata: Metadata = {
   title: "Sleep N Dream | Better Sleep, Better Mornings",
   description:
@@ -45,7 +36,7 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`${bricolage.variable} ${beVietnam.variable} ${lora.variable}`}
+      className={`${bricolage.variable} ${beVietnam.variable}`}
     >
       <body>
         <Navbar />

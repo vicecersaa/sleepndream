@@ -10,8 +10,10 @@ const REVIEWS = [
   {
     id: "nadia",
     tag: "Nyaman banget",
-    quote:
-      "Kasurnya nyaman banget buat rebahan setelah aktivitas seharian. Dari pertama dicoba langsung terasa pas dan bikin kamar jadi tempat favoritku.",
+    quoteStart:
+      "Kasurnya nyaman banget buat rebahan setelah aktivitas seharian. Dari pertama dicoba ",
+    emphasis: "langsung terasa pas",
+    quoteEnd: " dan bikin kamar jadi tempat favoritku.",
     name: "Nadia P.",
     initials: "NP",
     product: "Harmony Mattress",
@@ -19,8 +21,9 @@ const REVIEWS = [
   {
     id: "rizky",
     tag: "Tidur makin enak",
-    quote:
-      "Suka sama feel kasurnya yang empuk tapi tetap terasa menopang badan. Setiap pulang kerja rasanya pengen langsung istirahat.",
+    quoteStart: "Suka sama feel kasurnya yang ",
+    emphasis: "empuk tapi tetap terasa menopang badan",
+    quoteEnd: ". Setiap pulang kerja rasanya pengen langsung istirahat.",
     name: "Rizky A.",
     initials: "RA",
     product: "Serenity Mattress",
@@ -28,8 +31,10 @@ const REVIEWS = [
   {
     id: "michelle",
     tag: "Favorit di rumah",
-    quote:
-      "Awalnya cuma mau ganti kasur lama, ternyata sekarang malah jadi bagian paling nyaman di kamar. Desainnya juga cocok banget sama ruanganku.",
+    quoteStart:
+      "Awalnya cuma mau ganti kasur lama, ternyata sekarang malah jadi ",
+    emphasis: "bagian paling nyaman di kamar",
+    quoteEnd: ". Desainnya juga cocok banget sama ruanganku.",
     name: "Michelle T.",
     initials: "MT",
     product: "Dream Mattress",
@@ -108,7 +113,9 @@ export default function ReviewsSection() {
                     </div>
 
                     <p className={styles.quote}>
-                      “{review.quote}”
+                      “{review.quoteStart}
+                      <strong>{review.emphasis}</strong>
+                      {review.quoteEnd}”
                     </p>
 
                     <div className={styles.reviewFooter}>

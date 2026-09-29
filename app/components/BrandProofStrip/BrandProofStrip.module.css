@@ -10,9 +10,9 @@
   align-items: center;
   gap: 24px;
   width: min(calc(100% - (var(--page-gutter, 48px) * 2)), 1100px);
-  min-height: 154px;
+  min-height: 300px;
   margin-inline: auto;
-  padding-block: 30px;
+  padding-block: 72px;
 }
 
 .highlights {
@@ -53,7 +53,7 @@
   color: rgba(255, 255, 255, 0.72);
   font-family: var(--font-body), sans-serif;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.35;
 }
 
@@ -67,7 +67,7 @@
   color: rgba(255, 255, 255, 0.82);
   font-family: var(--font-body), sans-serif;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.55;
 }
 
@@ -75,7 +75,7 @@
   display: block;
   margin-top: 10px;
   color: var(--color-orange, #f2ac2a);
-  font-family: var(--font-italic), serif;
+  font-family: var(--font-display), sans-serif;
   font-size: 13px;
   font-style: italic;
   font-weight: 600;
@@ -86,8 +86,8 @@
   .container {
     grid-template-columns: minmax(0, 1.25fr) minmax(260px, 1fr);
     gap: 20px;
-    min-height: 146px;
-    padding-block: 26px;
+    min-height: 270px;
+    padding-block: 60px;
   }
 
   .highlight {
@@ -99,7 +99,8 @@
   .container {
     grid-template-columns: 1fr;
     gap: 24px;
-    padding-block: 28px;
+    min-height: 250px;
+    padding-block: 48px;
   }
 
   .highlights {

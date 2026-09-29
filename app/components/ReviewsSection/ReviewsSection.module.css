@@ -86,17 +86,13 @@
 
 .title span {
   display: inline-block;
-
-  /* Geser baris italic sedikit ke kanan */
-  padding-left: 18px;
-
-  font-family: var(--font-italic), serif;
-  font-size: 1.12em;
+  padding-left: 0;
+  font-family: var(--font-display), sans-serif;
+  font-size: 1em;
   font-weight: 500;
   font-style: italic;
   letter-spacing: -0.055em;
-
-  color: var(--color-orange, #f2ac2a);
+  color: var(--color-navy, #0f2c3c);
 }
 
 /* =========================================
@@ -139,7 +135,8 @@
 }
 
 .primaryButton {
-  background: var(--color-navy, #0f2c3c);
+  border-color: var(--color-blue, #537799);
+  background: var(--color-blue, #537799);
   color: #ffffff;
 }
 
@@ -150,8 +147,8 @@
 }
 
 .secondaryButton {
-  border-color: var(--color-orange, #f2ac2a);
-  background: var(--color-orange, #f2ac2a);
+  border-color: var(--color-navy, #0f2c3c);
+  background: transparent;
   color: var(--color-navy, #0f2c3c);
 }
 
@@ -194,24 +191,22 @@
   min-height: 320px;
   padding: 18px 16px;
 
-  border: 0;
-  border-radius: 22px 22px 8px 22px;
-
-  background: #ffffff;
-  box-shadow: 0 14px 34px rgba(15, 44, 60, 0.07);
+  border: 1px solid rgba(15, 44, 60, 0.08);
+  border-radius: 10px;
+  background: #faf9f6;
+  box-shadow: 0 10px 28px rgba(15, 44, 60, 0.055);
 }
 
 .reviewCard:nth-child(1) {
-  background: #eef4f8;
+  background: #faf9f6;
 }
 
 .reviewCard:nth-child(2) {
-  border-radius: 22px 8px 22px 22px;
-  background: #ffffff;
+  background: #faf9f6;
 }
 
 .reviewCard:nth-child(3) {
-  background: #fff7e5;
+  background: #faf9f6;
 }
 
 /* =========================================
@@ -228,8 +223,9 @@
 
   border-radius: 999px;
 
-  background: var(--color-blue, #537799);
-  color: #ffffff;
+  border: 1px solid rgba(15, 44, 60, 0.14);
+  background: transparent;
+  color: var(--color-navy, #0f2c3c);
 
   font-family: var(--font-body), sans-serif;
   font-size: 11px;
@@ -274,6 +270,10 @@
   line-height: 1.6;
 
   color: var(--color-navy, #0f2c3c);
+}
+
+.quote strong {
+  font-weight: 700;
 }
 
 /* =========================================
@@ -348,7 +348,7 @@
   }
 
   .title span {
-    padding-left: 14px;
+    padding-left: 0;
   }
 
   .reviewGrid {
@@ -396,7 +396,7 @@
   }
 
   .title span {
-    padding-left: 18px;
+    padding-left: 0;
   }
 
   .reviewGrid {
@@ -441,7 +441,7 @@
   }
 
   .title span {
-    padding-left: 10px;
+    padding-left: 0;
   }
 
   .actions {
@@ -497,7 +497,7 @@
   }
 
   .title span {
-    padding-left: 6px;
+    padding-left: 0;
   }
 
   .reviewGrid {

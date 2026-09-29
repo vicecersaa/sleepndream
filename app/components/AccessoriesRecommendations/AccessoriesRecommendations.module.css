@@ -23,10 +23,10 @@
 
 .header {
   display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 24px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
 }
 
 .title {
@@ -52,19 +52,16 @@
 .categoryFilters {
   display: flex;
   align-items: center;
-  align-self: flex-start;
   flex-shrink: 0;
-  gap: 22px;
-  border-bottom: 1px solid rgba(15, 44, 60, 0.22);
+  gap: 8px;
 }
 
 .categoryFilter {
-  position: relative;
-  padding: 0 1px 8px;
-  border: 0;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
-  background: transparent;
+  min-height: 38px;
+  padding: 8px 16px;
+  border: 1px solid rgba(15, 44, 60, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.38);
   color: rgba(15, 44, 60, 0.68);
   font-family: var(--font-body), sans-serif;
   font-size: 13px;
@@ -72,12 +69,18 @@
   line-height: 1.2;
   white-space: nowrap;
   cursor: pointer;
-  transition: color 180ms ease, border-color 180ms ease;
+  transition: color 180ms ease, border-color 180ms ease, background-color 180ms ease;
 }
 
 .categoryFilter:hover,
 .categoryFilterActive {
-  border-bottom-color: var(--color-navy, #0f2c3c);
+  border-color: var(--color-navy, #0f2c3c);
+  background: var(--color-navy, #0f2c3c);
+  color: #ffffff;
+}
+
+.categoryFilter:hover:not(.categoryFilterActive) {
+  background: rgba(15, 44, 60, 0.08);
   color: var(--color-navy, #0f2c3c);
 }
 
@@ -91,84 +94,15 @@
 }
 
 /* =========================================
-   PANAH
-========================================= */
-
-.controls {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  align-self: auto;
-  flex-shrink: 0;
-  gap: 8px;
-}
-
-.arrowButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-
-  width: 36px;
-  height: 36px;
-  padding: 0;
-
-  border: 1px solid var(--color-navy, #0f2c3c);
-  border-radius: 50%;
-  box-shadow: none;
-
-  background: var(--color-navy, #0f2c3c);
-  color: var(--color-white, #ffffff);
-  cursor: pointer;
-
-  transition:
-    color 180ms ease,
-    opacity 180ms ease;
-}
-
-.arrowButton svg {
-  display: block;
-  width: 22px;
-  height: 22px;
-  overflow: visible;
-
-  filter: none;
-  box-shadow: none;
-  transition: transform 180ms ease;
-}
-
-.arrowButton:hover:not(:disabled) {
-  border-color: var(--color-blue, #537799);
-  background: var(--color-blue, #537799);
-  color: var(--color-white, #ffffff);
-}
-
-.arrowButton:hover:not(:disabled) svg {
-  transform: scale(1.08);
-}
-
-.arrowButton:disabled {
-  opacity: 0.28;
-  cursor: not-allowed;
-}
-
-.arrowButton:focus-visible {
-  outline: 2px solid var(--color-blue, #537799);
-  outline-offset: 3px;
-}
-
-/* =========================================
    SLIDER
 ========================================= */
 
 .track {
-  --card-gap: 20px;
+  --card-gap: 26px;
 
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: calc(
-    (100% - (var(--card-gap) * 2)) / 3
-  );
+  grid-auto-columns: 35.5%;
 
   gap: var(--card-gap);
   width: 100%;
@@ -177,7 +111,7 @@
   overflow-y: hidden;
   padding: 0 0 4px;
 
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: x proximity;
   scroll-behavior: smooth;
   overscroll-behavior-x: contain;
 
@@ -206,11 +140,7 @@
 }
 
 .sliderFooter {
-  margin-top: 32px;
-}
-
-.sliderFooterHidden {
-  display: none;
+  margin-top: 28px;
 }
 
 .scrollTracker {
@@ -240,6 +170,47 @@
   margin-top: 16px;
 }
 
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.arrowButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--color-navy, #0f2c3c);
+  border-radius: 50%;
+  background: var(--color-navy, #0f2c3c);
+  color: var(--color-white, #ffffff);
+  cursor: pointer;
+  transition: background-color 180ms ease, border-color 180ms ease, opacity 180ms ease;
+}
+
+.arrowButton svg {
+  width: 22px;
+  height: 22px;
+}
+
+.arrowButton:hover:not(:disabled) {
+  border-color: var(--color-blue, #537799);
+  background: var(--color-blue, #537799);
+}
+
+.arrowButton:disabled {
+  opacity: 0.28;
+  cursor: not-allowed;
+}
+
+.arrowButton:focus-visible {
+  outline: 2px solid var(--color-blue, #537799);
+  outline-offset: 3px;
+}
+
 /* =========================================
    PRODUCT CARD
 ========================================= */
@@ -260,7 +231,7 @@
 .imageWrap {
   position: relative;
   width: 100%;
-  aspect-ratio: 1.56 / 1;
+  aspect-ratio: 1.34 / 1;
 
   overflow: hidden;
   border-radius: 10px;
@@ -503,7 +474,7 @@
   padding: 2px;
 
   border: 1px solid rgba(17, 17, 17, 0.2);
-  border-radius: 7px;
+  border-radius: 50%;
 
   background: transparent;
   cursor: pointer;
@@ -518,7 +489,7 @@
   width: 100%;
   height: 100%;
 
-  border-radius: 4px;
+  border-radius: 50%;
   border: 1px solid rgba(17, 17, 17, 0.06);
 }
 
@@ -619,10 +590,8 @@
   }
 
   .track {
-    --card-gap: 16px;
-    grid-auto-columns: calc(
-      (100% - var(--card-gap)) / 2
-    );
+    --card-gap: 20px;
+    grid-auto-columns: 47%;
   }
 
   .imageWrap {
@@ -647,14 +616,15 @@
   .header {
     align-items: flex-start;
     flex-direction: column;
-    gap: 14px;
+    gap: 16px;
     margin-bottom: 20px;
   }
 
   .categoryFilters {
     flex: 1;
     min-width: 0;
-    gap: 18px;
+    width: 100%;
+    gap: 8px;
     transform: none;
     overflow-x: auto;
     scrollbar-width: none;
@@ -665,7 +635,8 @@
   }
 
   .categoryFilter {
-    padding-bottom: 7px;
+    min-height: 36px;
+    padding: 7px 14px;
     font-size: 12px;
   }
 
@@ -676,24 +647,9 @@
     text-shadow: none;
   }
 
-  .controls {
-    gap: 8px;
-  }
-
-  .arrowButton {
-    width: 30px;
-    height: 30px;
-  }
-
-  .arrowButton svg {
-    width: 23px;
-    height: 23px;
-    filter: none;
-  }
-
   .track {
-    --card-gap: 12px;
-    grid-auto-columns: 82%;
+    --card-gap: 16px;
+    grid-auto-columns: 78%;
   }
 
   .imageWrap {
@@ -747,8 +703,8 @@
   }
 
   .swatch {
-    width: 22px;
-    height: 22px;
+    width: 23px;
+    height: 23px;
   }
 
   .cta {
@@ -762,6 +718,11 @@
     width: 6px;
     height: 6px;
   }
+
+  .arrowButton {
+    width: 38px;
+    height: 38px;
+  }
 }
 
 /* =========================================
@@ -774,7 +735,7 @@
   }
 
   .track {
-    grid-auto-columns: 86%;
+    grid-auto-columns: 82%;
   }
 
   .cardTitle {
@@ -784,17 +745,7 @@
 
 @media (max-width: 767px) {
   .sliderFooter {
-    margin-top: 20px;
-  }
-
-  .arrowButton {
-    width: 38px;
-    height: 38px;
-  }
-
-  .arrowButton svg {
-    width: 22px;
-    height: 22px;
+    margin-top: 24px;
   }
 
 }
@@ -810,7 +761,6 @@
 
   .image,
   .arrowButton,
-  .arrowButton svg,
   .swatch,
   .cta,
   .cta::after {

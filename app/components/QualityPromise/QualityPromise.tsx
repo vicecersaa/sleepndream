@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 
 import styles from "./QualityPromise.module.css";
 
@@ -68,10 +67,6 @@ export default function QualityPromise() {
                   </div>
                 ))}
               </div>
-
-              <Link href="/products" className={styles.button}>
-                Lihat Koleksi
-              </Link>
             </div>
 
             <div className={styles.imageWrap}>

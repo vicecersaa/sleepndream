@@ -23,7 +23,7 @@
 
   --font-display: var(--font-bricolage);
   --font-body: var(--font-be-vietnam);
-  --font-italic: var(--font-lora);
+  --font-italic: var(--font-bricolage);
 
   /* CONTAINERS */
 
@@ -104,13 +104,25 @@ body {
   color: var(--color-navy);
 
   font-family: var(--font-body), sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
   -webkit-font-smoothing: antialiased;
 }
 
 em,
 i {
-  font-family: var(--font-italic), serif;
-  font-weight: 600;
+  font-family: var(--font-display), sans-serif;
+  font-weight: inherit;
+  font-style: italic;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display), sans-serif !important;
 }
 
 button,

@@ -50,19 +50,20 @@ export default function Hero() {
 
           <div className={styles.heroContent}>
             <div className={styles.contentInner}>
-              <span className={styles.eyebrow}>
-                SELAMAT DATANG DI SLEEP N DREAM
-              </span>
+              <div className={styles.copyPanel}>
+                <span className={styles.eyebrow}>
+                  Selamat Datang di Sleep and Dream.
+                </span>
 
-              <h1 id="hero-title" className={styles.title}>
-                <em className={styles.italic}>Nyaman hingga pagi.</em>
-              </h1>
+                <h1 id="hero-title" className={styles.title}>
+                  Nyaman Hingga Pagi.
+                </h1>
 
-              <p className={styles.description}>
-                Temukan kasur yang nyaman dan menopang tubuh
-                dengan baik, untuk tidur lebih berkualitas
-                setiap malam.
-              </p>
+                <p className={styles.description}>
+                  Temukan kasur yang nyaman dan menopang tubuh dengan baik,
+                  untuk tidur lebih berkualitas setiap malam.
+                </p>
+              </div>
 
               <div className={styles.actions}>
                 <Link

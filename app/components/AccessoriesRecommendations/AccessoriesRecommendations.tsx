@@ -30,7 +30,7 @@ type Swatch = {
 
 type Product = {
   id: number;
-  category: "Bantal" | "Bedding" | "Pelindung";
+  category: "Bantal" | "Bedding" | "Cover";
   badge?: string;
   image: string;
   name: string;
@@ -112,7 +112,7 @@ const PRODUCTS: Product[] = [
   },
   {
     id: 5,
-    category: "Pelindung",
+    category: "Cover",
     badge: "Perlindungan Ekstra",
     image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=1000&q=88&auto=format&fit=crop",
     name: "Mattress Protector",
@@ -132,23 +132,13 @@ const rupiah = new Intl.NumberFormat("id-ID", {
   maximumFractionDigits: 0,
 });
 
-const CATEGORIES = ["Lihat Semua", "Bantal", "Bedding", "Pelindung"] as const;
+const CATEGORIES = ["Lihat Semua", "Bantal", "Bedding", "Cover"] as const;
 type Category = (typeof CATEGORIES)[number];
-
-/* =========================================
-   PANAH CHEVRON
-========================================= */
 
 function ArrowLeftIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="m15 5-7 7 7 7"
-        stroke="currentColor"
-        strokeWidth="3.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="m15 5-7 7 7 7" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -156,13 +146,7 @@ function ArrowLeftIcon() {
 function ArrowRightIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="m9 5 7 7-7 7"
-        stroke="currentColor"
-        strokeWidth="3.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="m9 5 7 7-7 7" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -325,9 +309,7 @@ export default function AccessoriesRecommendations() {
       track.scrollWidth - track.clientWidth;
 
     setCanScrollLeft(track.scrollLeft > 2);
-    setCanScrollRight(
-      track.scrollLeft < maxScroll - 2
-    );
+    setCanScrollRight(track.scrollLeft < maxScroll - 2);
 
     setScrollProgress(
       maxScroll > 0 ? Math.min(100, (track.scrollLeft / maxScroll) * 100) : 0
@@ -364,20 +346,11 @@ export default function AccessoriesRecommendations() {
 
   function scrollByCard(direction: -1 | 1) {
     const track = trackRef.current;
+    const card = track?.querySelector<HTMLElement>(`.${styles.card}`);
 
-    if (!track) return;
+    if (!track || !card) return;
 
-    const card = track.querySelector<HTMLElement>(
-      `.${styles.card}`
-    );
-
-    if (!card) return;
-
-    const gap =
-      parseFloat(
-        window.getComputedStyle(track).columnGap
-      ) || 0;
-
+    const gap = parseFloat(window.getComputedStyle(track).columnGap) || 0;
     track.scrollBy({
       left: direction * (card.offsetWidth + gap),
       behavior: "smooth",
@@ -515,11 +488,7 @@ export default function AccessoriesRecommendations() {
           ))}
         </div>
 
-        <div
-          className={`${styles.sliderFooter} ${
-            !canScrollLeft && !canScrollRight ? styles.sliderFooterHidden : ""
-          }`}
-        >
+        <div className={styles.sliderFooter}>
           <div
             className={styles.scrollTracker}
             role="progressbar"
@@ -559,7 +528,6 @@ export default function AccessoriesRecommendations() {
               </button>
             </div>
           </div>
-
         </div>
       </div>
     </section>
