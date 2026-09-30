@@ -41,7 +41,7 @@
   display: block;
   aspect-ratio: 1.52 / 1;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: var(--radius-image);
   background: #cbd5da;
   color: #ffffff;
 }
@@ -156,7 +156,7 @@
 
   .imageWrap {
     aspect-ratio: 1.28 / 1;
-    border-radius: 8px;
+    border-radius: var(--radius-image);
   }
 
   .cardCopy {

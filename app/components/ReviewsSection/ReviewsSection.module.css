@@ -43,7 +43,7 @@
   height: auto;
 
   overflow: hidden;
-  border-radius: 14px;
+  border-radius: var(--radius-image);
 
   background: var(--color-light-blue, #78a5cb);
 }
@@ -428,7 +428,7 @@
 
   .photo {
     width: min(100%, 460px);
-    border-radius: 12px;
+    border-radius: var(--radius-image);
   }
 
   .header {

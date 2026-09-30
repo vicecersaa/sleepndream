@@ -263,7 +263,7 @@
   min-width: 0;
   aspect-ratio: 1.22 / 1;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: var(--radius-image);
   background: var(--color-navy, #0f2c3c);
   color: var(--color-white, #ffffff);
 
@@ -394,7 +394,7 @@
   }
 
   .card {
-    border-radius: 10px;
+    border-radius: var(--radius-image);
   }
 
 }
@@ -428,7 +428,7 @@
 
   .card {
     aspect-ratio: 1.12 / 1;
-    border-radius: 10px;
+    border-radius: var(--radius-image);
   }
 
   .cardContent {

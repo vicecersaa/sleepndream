@@ -41,7 +41,7 @@
   min-height: 128px;
 
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: var(--radius-image);
 }
 
 /* =========================================
@@ -269,7 +269,7 @@
 
   .card {
     min-height: 116px;
-    border-radius: 8px;
+    border-radius: var(--radius-image);
   }
 
   .blueCard,

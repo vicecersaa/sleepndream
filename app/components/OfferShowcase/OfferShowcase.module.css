@@ -150,7 +150,7 @@
   aspect-ratio: 0.68;
   min-width: 0;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: var(--radius-image);
   scroll-snap-align: start;
   background: #d9e0e4;
   color: #ffffff;
@@ -268,7 +268,7 @@
 
   .offerCard {
     aspect-ratio: 0.76;
-    border-radius: 8px;
+    border-radius: var(--radius-image);
   }
 
   .discountTag {

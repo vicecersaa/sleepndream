@@ -141,7 +141,7 @@
   overflow: hidden;
 
   border: none;
-  border-radius: 10px;
+  border-radius: var(--radius-image);
 
   background: var(--color-navy);
 }
@@ -473,7 +473,7 @@
   .hero {
     align-items: flex-start;
     min-height: 600px;
-    border-radius: 8px;
+    border-radius: var(--radius-image);
   }
 
   .image {
