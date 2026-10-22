@@ -1,4 +1,4 @@
-﻿
+
 "use client";
 
 import Image from "next/image";
@@ -66,7 +66,7 @@ const PRODUCTS: Product[] = [
     reviews: 312,
     oldPrice: 6499000,
     price: 4999000,
-    href: "/products/cloud-one",
+    href: "/products",
     swatches: COMMON_SWATCHES,
   },
   {
@@ -81,7 +81,7 @@ const PRODUCTS: Product[] = [
     reviews: 284,
     oldPrice: 7299000,
     price: 5899000,
-    href: "/products/cloud-one",
+    href: "/products",
     swatches: [
       { label: "Putih", color: "#f5f4ef" },
       { label: "Abu muda", color: "#d8dad8" },
@@ -104,7 +104,7 @@ const PRODUCTS: Product[] = [
     reviews: 198,
     oldPrice: 8999000,
     price: 7499000,
-    href: "/products/cloud-one",
+    href: "/products",
     swatches: COMMON_SWATCHES,
   },
   {
@@ -119,7 +119,7 @@ const PRODUCTS: Product[] = [
     reviews: 126,
     oldPrice: 6999000,
     price: 5499000,
-    href: "/products/cloud-one",
+    href: "/products",
     swatches: COMMON_SWATCHES,
   },
   {
@@ -134,7 +134,7 @@ const PRODUCTS: Product[] = [
     reviews: 420,
     oldPrice: 7899000,
     price: 6299000,
-    href: "/products/cloud-one",
+    href: "/products",
     swatches: COMMON_SWATCHES,
   },
 ];
@@ -221,7 +221,7 @@ function ProductCard({ product }: { product: Product }) {
             aria-label={`Nilai ${product.rating} dari 5, berdasarkan ${product.reviews} ulasan`}
           >
             <span className={styles.stars} aria-hidden="true">
-              â˜…â˜…â˜…â˜…â˜…
+              ★★★★★
             </span>
 
             <span className={styles.ratingValue}>
