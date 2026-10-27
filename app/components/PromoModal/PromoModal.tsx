@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import styles from "./PromoModal.module.css";
@@ -9,11 +10,17 @@ import styles from "./PromoModal.module.css";
 const PROMO_STORAGE_KEY = "sleepndream-promo-dismissed-v1";
 
 export default function PromoModal() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    if (pathname !== "/") {
+      setOpen(false);
+      return;
+    }
+
     setOpen(!window.localStorage.getItem(PROMO_STORAGE_KEY));
-  }, []);
+  }, [pathname]);
 
   function close() {
     window.localStorage.setItem(PROMO_STORAGE_KEY, "true");
