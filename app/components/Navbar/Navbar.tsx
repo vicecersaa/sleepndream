@@ -126,6 +126,16 @@ function UserIcon() {
   );
 }
 
+function LogoutIcon() {
+  return (
+    <IconBase>
+      <path d="m10 17 5-5-5-5" />
+      <path d="M15 12H3" />
+      <path d="M21 3v18a2 2 0 0 1-2 2h-7" />
+    </IconBase>
+  );
+}
+
 function BagIcon() {
   return (
     <IconBase>
@@ -178,6 +188,7 @@ export default function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [announcementIndex, setAnnouncementIndex] = useState(0);
+  const [signedIn, setSignedIn] = useState(false);
 
   const activeAnnouncement = ANNOUNCEMENTS[announcementIndex];
 
@@ -229,6 +240,32 @@ export default function Navbar() {
       window.removeEventListener("keydown", handleEscape);
     };
   }, []);
+
+  useEffect(() => {
+    let active = true;
+    const checkSession = async () => {
+      try {
+        const response = await fetch("/api/v1/auth/me", { credentials: "include" });
+        if (active) setSignedIn(response.ok);
+      } catch {
+        if (active) setSignedIn(false);
+      }
+    };
+    void checkSession();
+    window.addEventListener("sleepndream-auth-changed", checkSession);
+    return () => {
+      active = false;
+      window.removeEventListener("sleepndream-auth-changed", checkSession);
+    };
+  }, []);
+
+  async function logout() {
+    await fetch("/api/v1/auth/logout", { method: "POST", credentials: "include" }).catch(() => undefined);
+    setSignedIn(false);
+    closePanels();
+    router.push("/");
+    router.refresh();
+  }
 
   return (
     <header className={styles.header}>
@@ -293,9 +330,7 @@ export default function Navbar() {
               Cari Toko
             </Link>
 
-            <Link href="/account" onClick={closePanels}>
-              Akun Saya
-            </Link>
+            <Link href="/login" onClick={closePanels}>Masuk</Link>
           </div>
         </div>
       </div>
@@ -394,15 +429,15 @@ export default function Navbar() {
               {searchOpen ? <CloseIcon /> : <SearchIcon />}
             </button>
 
-            <Link
-              href="/account"
-              className={`${styles.iconButton} ${styles.desktopAction}`}
-              aria-label="Akun saya"
-              title="Akun saya"
-              onClick={closePanels}
-            >
-              <UserIcon />
-            </Link>
+            {signedIn ? (
+              <button type="button" className={`${styles.iconButton} ${styles.desktopAction}`} aria-label="Keluar dari akun" title="Keluar" onClick={() => void logout()}>
+                <LogoutIcon />
+              </button>
+            ) : (
+              <Link href="/login" className={`${styles.iconButton} ${styles.desktopAction}`} aria-label="Masuk ke akun" title="Masuk" onClick={closePanels}>
+                <UserIcon />
+              </Link>
+            )}
 
             <Link
               href="/cart"
@@ -529,9 +564,7 @@ export default function Navbar() {
                 Cari Toko
               </Link>
 
-              <Link href="/account" onClick={closePanels}>
-                Akun Saya
-              </Link>
+              {signedIn ? <button type="button" onClick={() => void logout()}>Keluar</button> : <Link href="/login" onClick={closePanels}>Masuk</Link>}
             </div>
           </div>
         </nav>

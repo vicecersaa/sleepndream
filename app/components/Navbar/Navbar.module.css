@@ -812,7 +812,12 @@
     padding-top: 26px;
   }
 
-  .mobileMenuFooter a {
+.mobileMenuFooter a,
+.mobileMenuFooter button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
     font-size: 14px;
     font-weight: 500;
 
