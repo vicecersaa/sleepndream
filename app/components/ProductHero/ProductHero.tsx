@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { addToCart } from "../../lib/cart";
 import styles from "./ProductHero.module.css";
 
 const images = [
@@ -57,7 +58,7 @@ export default function ProductHero({ slug }: { slug: string }) {
           <div className={styles.sectionLine}><p className={styles.label}>Pilih ukuran:</p><small>Jenis ukuran ⓘ</small></div><div className={styles.sizes}>{sizes.map(item => <button type="button" key={item} onClick={() => setSize(item)} className={size === item ? styles.sizeActive : ""}>{item}</button>)}</div>
           <div className={styles.upgrade}><div className={styles.sectionLine}><p className={styles.label}>Tingkatkan kasur:</p><small>Penawaran spesial ⓘ</small></div><label><input type="checkbox" checked={upgrade} onChange={event => setUpgrade(event.target.checked)} /><span />Aktifkan peningkatan <b>{format(3948000)}</b></label><div className={styles.bundle}><div><Image src="/images/featured-pillows.jpg" alt="Bantal" width={62} height={62}/><p>Original Pillow Double Pack<br/><small>Bantal lembut untuk tidur lebih nyaman.</small></p></div><strong>＋</strong><div><Image src="/images/featured-bedding.jpg" alt="Pelindung kasur" width={62} height={62}/><p>Breathable Mattress Protector<br/><small>Melindungi kasur dan mendukung sirkulasi udara.</small></p></div></div></div>
           <div className={styles.insurance}><label><input type="checkbox" checked={insurance} onChange={event => setInsurance(event.target.checked)} /> <b>Aktifkan asuransi pengiriman</b></label><p>Mencakup kerusakan akibat kecelakaan seperti noda, goresan, dan lainnya.</p><div><button>5 Tahun: <b>1,5 Juta</b></button><button>10 Tahun: <b>1,8 Juta</b></button></div></div>
-          <p className={styles.stock}>▣ Stok tersedia, pengiriman 1–2 hari kerja | Gratis ongkir & pengembalian</p><div className={styles.total}><b>Subtotal: <strong>{format(price + (insurance ? 1500000 : 0))}</strong></b></div><div className="product-purchase-actions"><button className={styles.cart} onClick={() => setAdded(true)}>{added ? "Ditambahkan ke keranjang ✓" : "Add to cart"}</button><Link href="/checkout" className="product-checkout">Checkout sekarang</Link></div><p className={styles.finance}>Cicilan tersedia mulai dari Rp54.000/bulan. Tidak perlu kartu kredit.</p>
+          <p className={styles.stock}>▣ Stok tersedia, pengiriman 1–2 hari kerja | Gratis ongkir & pengembalian</p><div className={styles.total}><b>Subtotal: <strong>{format(price + (insurance ? 1500000 : 0))}</strong></b></div><div className="product-purchase-actions"><button className={styles.cart} onClick={() => { addToCart({ id: `${slug}-${model}-${size}`, name: product.name, variant: `${model} · ${size}`, price: price + (insurance ? 1500000 : 0), image: images[activeImage] }); setAdded(true); }}>{added ? "Ditambahkan ke keranjang ✓" : "Add to cart"}</button><Link href="/checkout" className="product-checkout">Checkout sekarang</Link></div><p className={styles.finance}>Cicilan tersedia mulai dari Rp54.000/bulan. Tidak perlu kartu kredit.</p>
           <div className={styles.benefits}><div>▱<b>Pengiriman gratis</b></div><div>☾<b>Uji coba 100 malam</b></div><div>◎<b>10 tahun garansi</b></div></div>
         </section>
       </div>

@@ -5,6 +5,7 @@ import {
 } from "next/font/google";
 
 import Navbar from "./components/Navbar/Navbar";
+import PromoModal from "./components/PromoModal/PromoModal";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -41,6 +42,7 @@ export default function RootLayout({
       <body>
         <Navbar />
         {children}
+        <PromoModal />
       </body>
     </html>
   );

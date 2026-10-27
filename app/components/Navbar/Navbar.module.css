@@ -372,6 +372,7 @@
 }
 
 .iconButton {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -392,6 +393,23 @@
   transition:
     background-color var(--transition),
     color var(--transition);
+}
+
+.cartCount {
+  position: absolute;
+  top: 4px;
+  right: 2px;
+  display: grid;
+  min-width: 16px;
+  height: 16px;
+  place-items: center;
+  padding: 0 3px;
+  border-radius: 999px;
+  background: var(--navy);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 800;
+  line-height: 1;
 }
 
 .iconButton svg {

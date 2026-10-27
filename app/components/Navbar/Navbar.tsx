@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import styles from "./Navbar.module.css";
+import { CART_CHANGED_EVENT, readCart } from "../../lib/cart";
 
 type NavItem = {
   label: string;
@@ -189,6 +190,7 @@ export default function Navbar() {
   const [searchQuery, setSearchQuery] = useState("");
   const [announcementIndex, setAnnouncementIndex] = useState(0);
   const [signedIn, setSignedIn] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
 
   const activeAnnouncement = ANNOUNCEMENTS[announcementIndex];
 
@@ -238,6 +240,17 @@ export default function Navbar() {
 
     return () => {
       window.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
+
+  useEffect(() => {
+    const syncCart = () => setCartCount(readCart().reduce((total, item) => total + item.quantity, 0));
+    syncCart();
+    window.addEventListener(CART_CHANGED_EVENT, syncCart);
+    window.addEventListener("storage", syncCart);
+    return () => {
+      window.removeEventListener(CART_CHANGED_EVENT, syncCart);
+      window.removeEventListener("storage", syncCart);
     };
   }, []);
 
@@ -440,13 +453,14 @@ export default function Navbar() {
             )}
 
             <Link
-              href="/checkout"
+              href="/cart"
               className={styles.iconButton}
               aria-label="Keranjang belanja"
               title="Keranjang belanja"
               onClick={closePanels}
             >
               <BagIcon />
+              {cartCount > 0 && <span className={styles.cartCount}>{cartCount}</span>}
             </Link>
 
             <button
