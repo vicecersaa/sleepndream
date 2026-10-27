@@ -193,7 +193,7 @@ function ProductCard({ product }: { product: Product }) {
 
   return (
     <article className={styles.card}>
-      <div className={styles.imageWrap}>
+      <Link href={product.href} className={styles.imageWrap} aria-label={`Lihat ${product.name}`}>
         {product.badge && (
           <span className={styles.badge}>
             {product.badge}
@@ -208,7 +208,7 @@ function ProductCard({ product }: { product: Product }) {
           className={styles.image}
           draggable={false}
         />
-      </div>
+      </Link>
 
       <div className={styles.cardContent}>
         <div className={styles.headingRow}>
