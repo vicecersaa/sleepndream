@@ -45,7 +45,8 @@ export default function AuthForm({ mode }: { mode: "login" | "register" }) {
   const [confirmation, setConfirmation] = useState("");
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
-  const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
+  const [clientId, setClientId] = useState(process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || "");
+  const [configLoaded, setConfigLoaded] = useState(Boolean(process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID));
   const isLogin = mode === "login";
 
   const complete = () => {
@@ -53,6 +54,19 @@ export default function AuthForm({ mode }: { mode: "login" | "register" }) {
     router.push("/");
     router.refresh();
   };
+
+  useEffect(() => {
+    if (clientId) return;
+    let active = true;
+    void fetch("/api/public-config")
+      .then((response) => response.ok ? response.json() : null)
+      .then((config) => {
+        if (active && typeof config?.googleClientId === "string") setClientId(config.googleClientId);
+      })
+      .catch(() => undefined)
+      .finally(() => { if (active) setConfigLoaded(true); });
+    return () => { active = false; };
+  }, [clientId]);
 
   useEffect(() => {
     if (!clientId || !buttonRef.current) return;
@@ -90,5 +104,5 @@ export default function AuthForm({ mode }: { mode: "login" | "register" }) {
     } catch (error) { setMessage(error instanceof Error ? error.message : "Tidak dapat terhubung ke server."); } finally { setBusy(false); }
   }
 
-  return <main className={styles.page}><section className={styles.shell}><aside className={styles.story}><p className={styles.eyebrow}>SLEEP N DREAM</p><h1>Bangun dengan rasa yang lebih baik.</h1><p>Masuk untuk menyimpan pesanan, alamat pengiriman, dan pilihan tidur Anda.</p><span>Better sleep, better mornings.</span></aside><section className={styles.formPanel}><p className={styles.eyebrow}>{isLogin ? "SELAMAT DATANG KEMBALI" : "BUAT AKUN"}</p><h2>{isLogin ? "Masuk ke akun Anda" : "Mulai perjalanan tidur Anda"}</h2><p className={styles.intro}>{isLogin ? "Lanjutkan belanja dan lihat pesanan Anda." : "Buat akun untuk pengalaman belanja yang lebih personal."}</p>{message && <p className={styles.error} role="alert">{message}</p>}{clientId ? <div className={styles.google} ref={buttonRef} /> : <p className={styles.notice}>Login Google akan aktif setelah <code>NEXT_PUBLIC_GOOGLE_CLIENT_ID</code> dipasang di frontend.</p>}<div className={styles.divider}>ATAU DENGAN EMAIL</div><form onSubmit={submit}><label>Email<input type="email" required autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="nama@email.com" /></label><label>Kata sandi<input type="password" required minLength={6} autoComplete={isLogin ? "current-password" : "new-password"} value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Minimal 6 karakter" /></label>{!isLogin && <label>Konfirmasi kata sandi<input type="password" required minLength={6} autoComplete="new-password" value={confirmation} onChange={(event) => setConfirmation(event.target.value)} placeholder="Ulangi kata sandi" /></label>}<button className="btn btn-primary btn-full" disabled={busy}>{busy ? "Memproses..." : isLogin ? "Masuk" : "Buat akun"}</button></form><p className={styles.switch}>{isLogin ? "Belum punya akun?" : "Sudah punya akun?"} <Link href={isLogin ? "/register" : "/login"}>{isLogin ? "Daftar sekarang" : "Masuk"}</Link></p></section></section></main>;
+  return <main className={styles.page}><section className={styles.shell}><aside className={styles.story}><p className={styles.eyebrow}>SLEEP N DREAM</p><h1>Bangun dengan rasa yang lebih baik.</h1><p>Masuk untuk menyimpan pesanan, alamat pengiriman, dan pilihan tidur Anda.</p><span>Better sleep, better mornings.</span></aside><section className={styles.formPanel}><p className={styles.eyebrow}>{isLogin ? "SELAMAT DATANG KEMBALI" : "BUAT AKUN"}</p><h2>{isLogin ? "Masuk ke akun Anda" : "Mulai perjalanan tidur Anda"}</h2><p className={styles.intro}>{isLogin ? "Lanjutkan belanja dan lihat pesanan Anda." : "Buat akun untuk pengalaman belanja yang lebih personal."}</p>{message && <p className={styles.error} role="alert">{message}</p>}{clientId ? <div className={styles.google} ref={buttonRef} /> : configLoaded ? <p className={styles.notice}>Login Google akan aktif setelah <code>NEXT_PUBLIC_GOOGLE_CLIENT_ID</code> dipasang di frontend.</p> : <div className={styles.google} aria-label="Memuat login Google" />}<div className={styles.divider}>ATAU DENGAN EMAIL</div><form onSubmit={submit}><label>Email<input type="email" required autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="nama@email.com" /></label><label>Kata sandi<input type="password" required minLength={6} autoComplete={isLogin ? "current-password" : "new-password"} value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Minimal 6 karakter" /></label>{!isLogin && <label>Konfirmasi kata sandi<input type="password" required minLength={6} autoComplete="new-password" value={confirmation} onChange={(event) => setConfirmation(event.target.value)} placeholder="Ulangi kata sandi" /></label>}<button className="btn btn-primary btn-full" disabled={busy}>{busy ? "Memproses..." : isLogin ? "Masuk" : "Buat akun"}</button></form><p className={styles.switch}>{isLogin ? "Belum punya akun?" : "Sudah punya akun?"} <Link href={isLogin ? "/register" : "/login"}>{isLogin ? "Daftar sekarang" : "Masuk"}</Link></p></section></section></main>;
 }
