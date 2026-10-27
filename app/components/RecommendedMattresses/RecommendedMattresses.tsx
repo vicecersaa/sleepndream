@@ -66,7 +66,7 @@ const PRODUCTS: Product[] = [
     reviews: 312,
     oldPrice: 6499000,
     price: 4999000,
-    href: "/products",
+    href: "/products/harmony",
     swatches: COMMON_SWATCHES,
   },
   {
@@ -81,7 +81,7 @@ const PRODUCTS: Product[] = [
     reviews: 284,
     oldPrice: 7299000,
     price: 5899000,
-    href: "/products",
+    href: "/products/serenity",
     swatches: [
       { label: "Putih", color: "#f5f4ef" },
       { label: "Abu muda", color: "#d8dad8" },
@@ -104,7 +104,7 @@ const PRODUCTS: Product[] = [
     reviews: 198,
     oldPrice: 8999000,
     price: 7499000,
-    href: "/products",
+    href: "/products/restore",
     swatches: COMMON_SWATCHES,
   },
   {
@@ -119,7 +119,7 @@ const PRODUCTS: Product[] = [
     reviews: 126,
     oldPrice: 6999000,
     price: 5499000,
-    href: "/products",
+    href: "/products/dream",
     swatches: COMMON_SWATCHES,
   },
   {
@@ -134,7 +134,7 @@ const PRODUCTS: Product[] = [
     reviews: 420,
     oldPrice: 7899000,
     price: 6299000,
-    href: "/products",
+    href: "/products/bloom",
     swatches: COMMON_SWATCHES,
   },
 ];
