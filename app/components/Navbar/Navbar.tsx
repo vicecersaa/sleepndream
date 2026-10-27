@@ -440,7 +440,7 @@ export default function Navbar() {
             )}
 
             <Link
-              href="/cart"
+              href="/checkout"
               className={styles.iconButton}
               aria-label="Keranjang belanja"
               title="Keranjang belanja"
