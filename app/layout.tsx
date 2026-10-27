@@ -6,6 +6,7 @@ import {
 
 import Navbar from "./components/Navbar/Navbar";
 import PromoModal from "./components/PromoModal/PromoModal";
+import WhatsAppButton from "./components/WhatsAppButton/WhatsAppButton";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -43,6 +44,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <PromoModal />
+        <WhatsAppButton />
       </body>
     </html>
   );
