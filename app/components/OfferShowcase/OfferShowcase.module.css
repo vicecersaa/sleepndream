@@ -7,8 +7,8 @@
 
 .container {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-  gap: clamp(44px, 4vw, 56px);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: clamp(40px, 3vw, 52px);
   width: min(
     calc(100% - (var(--page-gutter, 48px) * 2)),
     var(--container-max, 1280px)
@@ -25,7 +25,7 @@
 }
 
 .title {
-  max-width: 460px;
+  max-width: 570px;
   margin: 0;
   color: var(--color-navy, #0f2c3c);
   font-family: var(--font-italic), serif;
@@ -130,8 +130,8 @@
 .track {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(300px, 48.5%);
-  gap: 10px;
+  grid-auto-columns: calc((100% - 12px) / 2);
+  gap: 12px;
   min-width: 0;
   overflow-x: auto;
   overflow-y: hidden;
@@ -207,7 +207,7 @@
   }
 
   .container {
-    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
     gap: 36px;
   }
 
