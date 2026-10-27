@@ -389,3 +389,38 @@ p {
     transition: none;
   }
 }
+
+/* Product detail purchase controls */
+.product-purchase-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.product-purchase-actions .cart,
+.product-checkout {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 54px;
+  box-sizing: border-box;
+  border-radius: 28px;
+  font: 700 14px var(--font-body), sans-serif;
+}
+
+.product-checkout {
+  border: 1px solid #10384a;
+  background: #ffffff;
+  color: #10384a;
+}
+
+.product-checkout:hover {
+  background: #eef3f5;
+}
+
+@media (max-width: 480px) {
+  .product-purchase-actions {
+    grid-template-columns: 1fr;
+  }
+}
