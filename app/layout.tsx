@@ -3,6 +3,7 @@ import type { ReactNode } from 'react'
 import { Sora, Manrope } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/app/components/Navbar'
+import Footer from '@/app/components/Footer'
 
 const sora = Sora({
   subsets: ['latin'],
@@ -29,6 +30,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body>
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   )
