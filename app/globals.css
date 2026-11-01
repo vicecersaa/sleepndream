@@ -16,11 +16,10 @@
   --color-orange: #f2ac2a;
   --color-white: #ffffff;
 
-  /* TYPOGRAPHY
-     Variabel --font-bricolage dan --font-be-vietnam
-     berasal dari next/font di app/layout.tsx.
-  */
-
+  /* Typography stays local so the production build does not depend on
+     resolving Google Font modules at build time. */
+  --font-bricolage: "Arial Narrow", "Aptos Display", Arial, sans-serif;
+  --font-be-vietnam: "Aptos", "Segoe UI", Arial, sans-serif;
   --font-display: var(--font-bricolage);
   --font-body: var(--font-be-vietnam);
   --font-italic: var(--font-bricolage);

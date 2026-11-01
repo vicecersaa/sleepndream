@@ -1,29 +1,10 @@
 import type { Metadata } from "next";
-import {
-  Bricolage_Grotesque,
-  Be_Vietnam_Pro,
-} from "next/font/google";
 
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import PromoModal from "./components/PromoModal/PromoModal";
 import WhatsAppButton from "./components/WhatsAppButton/WhatsAppButton";
 import "./globals.css";
-
-const bricolage = Bricolage_Grotesque({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  display: "swap",
-  variable: "--font-bricolage",
-});
-
-const beVietnam = Be_Vietnam_Pro({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  style: ["normal", "italic"],
-  display: "swap",
-  variable: "--font-be-vietnam",
-});
 
 export const metadata: Metadata = {
   title: "Sleep N Dream | Better Sleep, Better Mornings",
@@ -37,10 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="id"
-      className={`${bricolage.variable} ${beVietnam.variable}`}
-    >
+    <html lang="id">
       <body>
         <Navbar />
         {children}
