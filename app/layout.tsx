@@ -5,6 +5,7 @@ import {
 } from "next/font/google";
 
 import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
 import PromoModal from "./components/PromoModal/PromoModal";
 import WhatsAppButton from "./components/WhatsAppButton/WhatsAppButton";
 import "./globals.css";
@@ -45,6 +46,7 @@ export default function RootLayout({
         {children}
         <PromoModal />
         <WhatsAppButton />
+        <Footer />
       </body>
     </html>
   );
