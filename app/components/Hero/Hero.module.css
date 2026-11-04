@@ -435,7 +435,7 @@
 
 @media (max-width: 767px) {
   .section {
-    padding-top: 6px;
+    padding-top: 16px;
   }
 
   .promoBar {
@@ -443,7 +443,7 @@
 
     gap: 8px 14px;
     padding: 14px 16px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 
     border-radius: 8px;
   }
@@ -478,24 +478,25 @@
 
   .image {
     object-fit: cover;
-    object-position: 62% center;
+    object-position: 78% center;
   }
 
   .imageOverlay {
     background: linear-gradient(
-      180deg,
-      rgba(230, 230, 230, 0.52) 0%,
-      rgba(230, 230, 230, 0.4) 33%,
-      rgba(230, 230, 230, 0.14) 65%,
-      rgba(230, 230, 230, 0) 90%
+      0deg,
+      rgba(230, 230, 230, 0.84) 0%,
+      rgba(230, 230, 230, 0.64) 35%,
+      rgba(230, 230, 230, 0.15) 67%,
+      rgba(230, 230, 230, 0) 100%
     );
   }
 
   .heroContent {
-    align-items: flex-start;
+    align-items: center;
+    justify-content: flex-start;
     min-height: inherit;
 
-    padding: 34px 24px 175px;
+    padding: 48px 24px 40px;
   }
 
   .contentInner {
@@ -555,7 +556,7 @@
   }
 
   .heroContent {
-    padding: 30px 20px 150px;
+    padding: 40px 20px 32px;
   }
 
   .title {
