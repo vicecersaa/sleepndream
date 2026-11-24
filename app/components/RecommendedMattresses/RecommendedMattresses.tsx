@@ -31,6 +31,8 @@ type Swatch = {
 type Product = {
   id: number;
   category: "Springbed" | "Hybrid" | "Busa";
+  series: "chiro" | "econo";
+  comfort: "Soft" | "Soft Medium" | "Medium" | "Medium Firm" | "Firm" | "Extra Firm";
   badge?: string;
   image: string;
   name: string;
@@ -53,9 +55,11 @@ const COMMON_SWATCHES: Swatch[] = [
   { label: "Navy", color: "#33475d" },
 ];
 
-const PRODUCTS: Product[] = [
+export const PRODUCTS: Product[] = [
   {
     id: 1,
+    series: "chiro",
+    comfort: "Soft",
     category: "Hybrid",
     badge: "Pilihan Favorit",
     image:
@@ -71,6 +75,8 @@ const PRODUCTS: Product[] = [
   },
   {
     id: 2,
+    series: "econo",
+    comfort: "Medium",
     category: "Busa",
     badge: "Paling Dicari",
     image:
@@ -94,6 +100,8 @@ const PRODUCTS: Product[] = [
   },
   {
     id: 3,
+    series: "chiro",
+    comfort: "Firm",
     category: "Springbed",
     badge: "Dukungan Ekstra",
     image:
@@ -109,6 +117,8 @@ const PRODUCTS: Product[] = [
   },
   {
     id: 4,
+    series: "econo",
+    comfort: "Soft Medium",
     category: "Busa",
     badge: "Koleksi Terbaru",
     image:
@@ -124,6 +134,8 @@ const PRODUCTS: Product[] = [
   },
   {
     id: 5,
+    series: "chiro",
+    comfort: "Medium Firm",
     category: "Hybrid",
     badge: "Untuk Keluarga",
     image:
@@ -184,7 +196,7 @@ function ArrowRightIcon() {
    PRODUCT CARD
 ========================================= */
 
-function ProductCard({ product }: { product: Product }) {
+export function ProductCard({ product }: { product: Product }) {
   const [selectedColor, setSelectedColor] = useState(0);
 
   const discount = Math.round(

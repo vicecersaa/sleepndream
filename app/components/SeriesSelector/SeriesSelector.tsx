@@ -10,7 +10,7 @@ const SERIES = [
       "Dukungan lebih terarah untuk membantu menjaga posisi tubuh tetap stabil sepanjang malam.",
     image:
       "https://images.unsplash.com/photo-1784318519037-7ee0b1668e95?auto=format&fit=crop&w=1500&q=88",
-    href: "/products",
+    href: "/products?series=chiro",
   },
   {
     name: "Econo Series",
@@ -18,7 +18,7 @@ const SERIES = [
       "Kenyamanan seimbang dan praktis untuk melengkapi kebutuhan istirahat setiap hari.",
     image:
       "https://images.unsplash.com/photo-1742319096912-7bb94fdfeb03?auto=format&fit=crop&w=1500&q=88",
-    href: "/products",
+    href: "/products?series=econo",
   },
 ] as const;
 

@@ -70,7 +70,7 @@
   /* NAVBAR */
 
   --promo-height: 44px;
-  --navbar-height: 92px;
+  --navbar-height: 74px;
 
   /* MOTION */
 
@@ -329,7 +329,7 @@ p {
   :root {
     --page-gutter: 32px;
     --section-spacing: 64px;
-    --navbar-height: 80px;
+    --navbar-height: 72px;
   }
 }
 
@@ -344,7 +344,7 @@ p {
     --section-spacing-large: 68px;
 
     --promo-height: 36px;
-    --navbar-height: 76px;
+    --navbar-height: 68px;
   }
 
   h1,

@@ -25,12 +25,12 @@ const NAV_ITEMS: NavItem[] = [
     href: "/products",
     children: [
       { label: "Semua Kasur", href: "/products" },
-      { label: "Kasur Pegas", href: "/products?category=spring" },
+      { label: "Kasur Pegas", href: "/products?material=Springbed" },
       {
-        label: "Kasur Busa Memori",
-        href: "/products?category=memory-foam",
+        label: "Kasur Busa",
+        href: "/products?material=Busa",
       },
-      { label: "Kasur Hibrida", href: "/products?category=hybrid" },
+      { label: "Kasur Hibrida", href: "/products?material=Hybrid" },
     ],
   },
   {
@@ -225,7 +225,7 @@ export default function Navbar() {
     if (!query) return;
 
     closePanels();
-    router.push(`/search?q=${encodeURIComponent(query)}`);
+    router.push(`/products?q=${encodeURIComponent(query)}`);
   }
 
   useEffect(() => {
