@@ -30,6 +30,7 @@
 }
 
 .title {
+  scroll-margin-top: calc(var(--promo-height) + var(--navbar-height) + 16px);
   display: inline-block;
   width: fit-content;
   max-width: 100%;
@@ -216,6 +217,7 @@
 ========================================= */
 
 .card {
+  scroll-margin-top: calc(var(--promo-height) + var(--navbar-height) + 16px);
   display: flex;
   flex-direction: column;
   min-width: 0;

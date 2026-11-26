@@ -67,9 +67,9 @@ export default function ReviewsSection() {
                 id="reviews-title"
                 className={styles.title}
               >
-                Malam lebih nyaman,
+                Cerita dari
                 <br />
-                <span>pagi terasa berbeda.</span>
+                <span>Pelanggan Kami</span>
               </h2>
 
               <div className={styles.actions}>

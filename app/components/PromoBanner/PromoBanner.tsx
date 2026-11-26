@@ -40,9 +40,9 @@ export default function PromoBanner() {
               </span>
 
               <h2 className={styles.title}>
-                Diskon spesial hingga 50%
+                Hemat hingga 50%
                 <br />
-                untuk pilihan kasur tertentu
+                untuk kasur pilihan
               </h2>
             </div>
 

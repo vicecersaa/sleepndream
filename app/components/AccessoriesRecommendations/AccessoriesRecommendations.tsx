@@ -30,6 +30,7 @@ type Swatch = {
 
 type Product = {
   id: number;
+  anchor?: string;
   category: "Bantal" | "Bedding" | "Cover";
   badge?: string;
   image: string;
@@ -56,6 +57,7 @@ const COMMON_SWATCHES: Swatch[] = [
 const PRODUCTS: Product[] = [
   {
     id: 1,
+    anchor: "aksesori-bantal",
     category: "Bantal",
     badge: "Pilihan Favorit",
     image: "https://images.unsplash.com/photo-1698746043955-42b03ddedfcb?w=1000&q=88&auto=format&fit=crop",
@@ -70,6 +72,7 @@ const PRODUCTS: Product[] = [
   },
   {
     id: 2,
+    anchor: "aksesori-guling",
     category: "Bantal",
     badge: "Paling Dicari",
     image: "https://images.unsplash.com/photo-1648475234432-f8a94f1338e7?w=1000&q=88&auto=format&fit=crop",
@@ -98,6 +101,7 @@ const PRODUCTS: Product[] = [
   },
   {
     id: 4,
+    anchor: "aksesori-bed-cover",
     category: "Bedding",
     badge: "Koleksi Terbaru",
     image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=1000&q=88&auto=format&fit=crop",
@@ -163,7 +167,7 @@ function ProductCard({ product }: { product: Product }) {
   );
 
   return (
-    <article className={styles.card}>
+    <article className={styles.card} id={product.anchor}>
       <div className={styles.imageWrap}>
         {product.badge && (
           <span className={styles.badge}>
@@ -288,6 +292,7 @@ export default function AccessoriesRecommendations() {
     startScrollLeft: 0,
   });
 
+  const pendingAnchor = useRef("");
   const suppressClickRef = useRef(false);
 
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -339,7 +344,29 @@ export default function AccessoriesRecommendations() {
     return () => observer.disconnect();
   }, [activeCategory, updateArrows]);
 
+  useEffect(() => {
+    function revealLinkedProduct() {
+      const anchor = window.location.hash.slice(1);
+      const product = PRODUCTS.find((item) => item.anchor === anchor);
+      if (!product || document.getElementById(anchor)) return;
+      pendingAnchor.current = anchor;
+      setActiveCategory(product.category);
+    }
+    window.addEventListener("hashchange", revealLinkedProduct);
+    return () => window.removeEventListener("hashchange", revealLinkedProduct);
+  }, []);
+
+  useEffect(() => {
+    if (!pendingAnchor.current) return;
+    document.getElementById(pendingAnchor.current)?.scrollIntoView({ block: "start", inline: "nearest" });
+    pendingAnchor.current = "";
+  }, [activeCategory]);
+
   function selectCategory(category: Category) {
+    const linkedProduct = PRODUCTS.find((item) => item.anchor === window.location.hash.slice(1));
+    if (linkedProduct && category !== "Lihat Semua" && category !== linkedProduct.category) {
+      window.history.replaceState(window.history.state, "", "#accessories-title");
+    }
     setActiveCategory(category);
     trackRef.current?.scrollTo({ left: 0, behavior: "smooth" });
   }
@@ -450,7 +477,7 @@ export default function AccessoriesRecommendations() {
             id="accessories-title"
             className={styles.title}
           >
-            Aksesori pilihan untukmu
+            Lengkapi Kenyamanan Tidur
           </h2>
 
           <div className={styles.categoryFilters} aria-label="Filter kategori aksesori">

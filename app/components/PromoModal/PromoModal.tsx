@@ -3,46 +3,62 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-
+import { useEffect, useRef } from "react";
+import promoArtwork from "../../../public/images/hero/hero-sleepndream.png";
 import styles from "./PromoModal.module.css";
 
+export const PROMO_DIALOG_ID = "sleepndream-promo";
 const PROMO_STORAGE_KEY = "sleepndream-promo-dismissed-v1";
 
 export default function PromoModal() {
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
+  const dialog = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
+    const modal = dialog.current;
+    if (!modal) return;
+
     if (pathname !== "/") {
-      setOpen(false);
+      if (modal.open) modal.close();
       return;
     }
 
-    setOpen(!window.localStorage.getItem(PROMO_STORAGE_KEY));
+    try {
+      if (!modal.open && !window.localStorage.getItem(PROMO_STORAGE_KEY)) modal.showModal();
+    } catch {
+      // The promo remains available from the navigation if storage is unavailable.
+    }
   }, [pathname]);
 
-  function close() {
-    window.localStorage.setItem(PROMO_STORAGE_KEY, "true");
-    setOpen(false);
+  function dismiss() {
+    try {
+      window.localStorage.setItem(PROMO_STORAGE_KEY, "true");
+    } catch {
+      // Closing the dialog still works when storage is unavailable.
+    }
   }
 
-  if (!open) return null;
-
-  return <div className={styles.backdrop} role="presentation">
-    <section className={styles.modal} role="dialog" aria-modal="true" aria-labelledby="promo-title">
-      <div className={styles.imageWrap}>
-        <Image src="/images/hero/hero-sleepndream.png" alt="Cloud One Sleep & Dream" fill priority sizes="(max-width: 700px) 100vw, 640px" />
-        <span>Promo Sleep &amp; Dream</span>
-        <button type="button" onClick={close} aria-label="Tutup promo">×</button>
-      </div>
-      <div className={styles.content}>
-        <h2 id="promo-title">Dapatkan Potongan 30%<br />Untuk Pembelian Pertama.</h2>
-        <p className={styles.product}><b>Cloud One</b><i />Kasur Busa Premium</p>
-        <p className={styles.copy}>Kenyamanan ekstra dengan teknologi RefinedCore+™ dan sirkulasi udara yang baik. Temukan promo Cloud One yang tersedia untuk Anda.</p>
-        <Link href="/products/cloud-one" className={styles.cta} onClick={close}>Tanya Promo Cloud One</Link>
-        <button type="button" className={styles.dismiss} onClick={close}>Nanti saja, saya ingin lanjut melihat</button>
-      </div>
-    </section>
-  </div>;
+  return (
+    <dialog
+      id={PROMO_DIALOG_ID}
+      className={styles.modal}
+      ref={dialog}
+      aria-label="Promo Sleep & Dream"
+      onClose={dismiss}
+      onClick={(event) => {
+        if (event.target === event.currentTarget) event.currentTarget.close();
+      }}
+    >
+      <button className={styles.close} type="button" aria-label="Tutup promo" onClick={() => dialog.current?.close()}>
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" width="20" height="20">
+          <path d="m6 6 12 12M18 6 6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+      </button>
+      <Link href="/products/cloud-one" className={styles.imageLink} aria-label="Lihat promo Cloud One"
+        onClick={() => dialog.current?.close()}
+      >
+        <Image src={promoArtwork} alt="" sizes="(max-width: 700px) 100vw, 960px" />
+      </Link>
+    </dialog>
+  );
 }

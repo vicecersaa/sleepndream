@@ -98,8 +98,8 @@ export default function OfferShowcase() {
       <div className={styles.container}>
         <div className={styles.intro}>
           <h2 id="offer-showcase-title" className={styles.title}>
+            <span>Penawaran Kasur Pilihan</span>
             <span>Hemat hingga 25%.</span>
-            <span>Tidur lebih nyaman.</span>
           </h2>
           <p className={styles.description}>
             Temukan pilihan kasur dan perlengkapan tidur dengan penawaran khusus,

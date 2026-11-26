@@ -1,69 +1,72 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { FormEvent, SVGProps } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import styles from "./Navbar.module.css";
+import { PROMO_DIALOG_ID } from "../PromoModal/PromoModal";
 import { CART_CHANGED_EVENT, readCart } from "../../lib/cart";
 
-type NavItem = {
-  label: string;
-  href: string;
-  children?: {
-    label: string;
-    href: string;
-  }[];
-};
+const WHATSAPP_URL = "https://wa.me/628170150815";
+const inquire = (type: string) => WHATSAPP_URL + "?text=" + encodeURIComponent("Halo Sleep & Dream, saya ingin tanya tentang " + type + ".");
 
-const NAV_ITEMS: NavItem[] = [
+const MATTRESS_GROUPS = [
   {
-    label: "Kasur",
-    href: "/products",
-    children: [
-      { label: "Semua Kasur", href: "/products" },
-      { label: "Kasur Pegas", href: "/products?material=Springbed" },
-      {
-        label: "Kasur Busa",
-        href: "/products?material=Busa",
-      },
-      { label: "Kasur Hibrida", href: "/products?material=Hybrid" },
+    title: "Jenis",
+    items: [
+      { label: "Kasur Set", href: inquire("kasur set") },
+      { label: "Kasur", href: "/products" },
+      { label: "Headboard", href: inquire("headboard") },
+      { label: "Dipan", href: inquire("dipan") },
+      { label: "Custom Kasur (Konsultasi)", href: inquire("kasur custom") },
     ],
   },
   {
-    label: "Rangka Tempat Tidur",
-    href: "/bed-frames",
-    children: [
-      { label: "Semua Rangka Tempat Tidur", href: "/bed-frames" },
-      {
-        label: "Tempat Tidur Berlapis Kain",
-        href: "/bed-frames?category=upholstered",
-      },
-      {
-        label: "Tempat Tidur Platform",
-        href: "/bed-frames?category=platform",
-      },
+    title: "Kenyamanan",
+    items: [
+      { label: "Soft", href: "/products?comfort=Soft" },
+      { label: "Medium Soft", href: "/products?series=econo&comfort=Soft+Medium" },
+      { label: "Medium Firm", href: "/products?comfort=Medium+Firm" },
+      { label: "Firm", href: "/products?comfort=Firm" },
+      { label: "Extra Firm", href: "/products?comfort=Extra+Firm" },
     ],
   },
-  {
-    label: "Perlengkapan Tidur",
-    href: "/bedding",
-    children: [
-      { label: "Semua Perlengkapan Tidur", href: "/bedding" },
-      { label: "Bantal", href: "/bedding?category=pillows" },
-      { label: "Seprai", href: "/bedding?category=bedsheets" },
-      {
-        label: "Pelindung Kasur",
-        href: "/bedding?category=protectors",
-      },
-    ],
-  },
-  { label: "Aksesori", href: "/accessories" },
-  { label: "Promo", href: "/deals" },
 ];
+
+const BEDDING_GROUPS = [{
+  title: "Jenis",
+  items: [
+    { label: "Bantal", href: "/#aksesori-bantal" },
+    { label: "Guling", href: "/#aksesori-guling" },
+    { label: "Bed Cover", href: "/#aksesori-bed-cover" },
+  ],
+}];
+
+const MEGA_MENUS = [
+  { label: "Kasur", groups: MATTRESS_GROUPS, href: "/products", image: "/images/featured-mattress.jpg" },
+  { label: "Perlengkapan Tidur", groups: BEDDING_GROUPS, href: "/#accessories-title", image: "/images/featured-bedding.jpg" },
+];
+
+function MegaGroups({ groups, onNavigate }: { groups: typeof MATTRESS_GROUPS; onNavigate: () => void }) {
+  return groups.map(({ title, items }) => (
+    <div className={styles.megaGroup} key={title}>
+      <p className={styles.megaHeading}>{title}</p>
+      <ul>
+        {items.map(({ label, href }) => (
+          <li key={label}>
+            {href.startsWith("/#aksesori-")
+              ? <a className={styles.megaLink} href={href} onClick={onNavigate}>{label}</a>
+              : <Link className={styles.megaLink} href={href} onClick={onNavigate}>{label}</Link>}
+          </li>
+        ))}
+      </ul>
+    </div>
+  ));
+}
 
 /* =========================================
    PROMO TENGAH
@@ -80,7 +83,7 @@ const ANNOUNCEMENTS = [
   },
   {
     text: "Lihat penawaran spesial kami",
-    href: "/deals",
+    href: "/#offer-showcase-title",
   },
 ] as const;
 
@@ -185,6 +188,7 @@ function ChevronRightIcon() {
 export default function Navbar() {
   const router = useRouter();
 
+  const desktopNav = useRef<HTMLElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -195,8 +199,16 @@ export default function Navbar() {
   const activeAnnouncement = ANNOUNCEMENTS[announcementIndex];
 
   function closePanels() {
+    desktopNav.current?.querySelector<HTMLDetailsElement>("details[open]")?.removeAttribute("open");
     setMenuOpen(false);
     setSearchOpen(false);
+  }
+
+  function openPromo(fromMobile = false) {
+    closePanels();
+    if (fromMobile) document.querySelector<HTMLButtonElement>('button[aria-controls="navbar-mobile-menu"]')?.focus();
+    const dialog = document.getElementById(PROMO_DIALOG_ID) as HTMLDialogElement | null;
+    if (dialog && !dialog.open) dialog.showModal();
   }
 
   function toggleMenu() {
@@ -205,6 +217,7 @@ export default function Navbar() {
   }
 
   function toggleSearch() {
+    desktopNav.current?.querySelector<HTMLDetailsElement>("details[open]")?.removeAttribute("open");
     setSearchOpen((current) => !current);
     setMenuOpen(false);
   }
@@ -339,7 +352,7 @@ export default function Navbar() {
           {/* KANAN */}
 
           <div className={styles.announcementLinks}>
-            <Link href="/stores" onClick={closePanels}>
+            <Link href="/#showroom" onClick={closePanels}>
               Cari Toko
             </Link>
 
@@ -377,51 +390,32 @@ export default function Navbar() {
               className={styles.desktopNav}
               aria-label="Navigasi utama"
             >
-              {NAV_ITEMS.map((item) => {
-                if (!item.children) {
-                  return (
-                    <Link
-                      key={item.label}
-                      href={item.href}
-                      className={styles.navLink}
-                      onClick={closePanels}
-                    >
-                      {item.label}
+              {MEGA_MENUS.map((menu) => (
+                <details key={menu.label} name="sleepndream-mega-menu" className={styles.megaDropdown}
+                  onPointerEnter={(event) => { if (event.pointerType === "mouse") event.currentTarget.open = true; }}
+                  onPointerLeave={(event) => {
+                    if (event.pointerType === "mouse" && !event.currentTarget.contains(document.activeElement)) event.currentTarget.open = false;
+                  }}
+                  onBlur={(event) => {
+                    if (!event.currentTarget.contains(event.relatedTarget)) event.currentTarget.open = false;
+                  }}
+                  onKeyDown={(event) => {
+                    if (event.key === "Escape" && event.currentTarget.open) {
+                      event.currentTarget.open = false;
+                      event.currentTarget.querySelector("summary")?.focus();
+                    }
+                  }}
+                >
+                  <summary className={styles.navLink}>{menu.label}</summary>
+                  <div className={styles.megaPanel} data-compact={menu.groups.length === 1}>
+                    <MegaGroups groups={menu.groups} onNavigate={closePanels} />
+                    <Link href={menu.href} className={styles.megaImage} aria-label={"Lihat koleksi " + menu.label.toLowerCase()} onClick={closePanels}>
+                      <Image src={menu.image} alt="" fill sizes="(min-width: 1200px) 440px, 40vw" />
                     </Link>
-                  );
-                }
-
-                return (
-                  <details
-                    key={item.label}
-                    className={styles.navDropdown}
-                  >
-                    <summary className={styles.navLink}>
-                      {item.label}
-                    </summary>
-
-                    <div className={styles.dropdownPanel}>
-                      {item.children.map((child) => (
-                        <Link
-                          key={child.href}
-                          href={child.href}
-                          className={styles.dropdownLink}
-                          onClick={(event) => {
-                            const details =
-                              event.currentTarget.closest("details");
-
-                            if (details) {
-                              details.open = false;
-                            }
-                          }}
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </details>
-                );
-              })}
+                  </div>
+                </details>
+              ))}
+              <button type="button" className={styles.navLink} aria-haspopup="dialog" aria-controls={PROMO_DIALOG_ID} onPointerEnter={closePanels} onClick={() => openPromo()}>Promo</button>
             </nav>
           </div>
 
@@ -530,51 +524,20 @@ export default function Navbar() {
           aria-label="Navigasi seluler"
         >
           <div className={styles.mobileMenuInner}>
-            {NAV_ITEMS.map((item) => {
-              if (!item.children) {
-                return (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    className={styles.mobileLink}
-                    onClick={closePanels}
-                  >
-                    {item.label}
-                  </Link>
-                );
-              }
-
-              return (
-                <details
-                  key={item.label}
-                  className={styles.mobileDropdown}
-                >
-                  <summary className={styles.mobileLink}>
-                    <span>{item.label}</span>
-
-                    <span
-                      className={styles.mobilePlus}
-                      aria-hidden="true"
-                    />
-                  </summary>
-
-                  <div className={styles.mobileSubmenu}>
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.href}
-                        href={child.href}
-                        onClick={closePanels}
-                      >
-                        {child.label}
-                      </Link>
-                    ))}
-                  </div>
-                </details>
-              );
-            })}
+            {MEGA_MENUS.map((menu) => (
+              <details key={menu.label} name="sleepndream-mobile-menu" className={styles.mobileDropdown}>
+                <summary className={styles.mobileLink}>
+                  {menu.label}<span className={styles.mobilePlus} aria-hidden="true" />
+                </summary>
+                <div className={styles.mobileSubmenu}>
+                  <MegaGroups groups={menu.groups} onNavigate={closePanels} />
+                </div>
+              </details>
+            ))}
+            <button type="button" className={styles.mobileLink} aria-haspopup="dialog" aria-controls={PROMO_DIALOG_ID} onClick={() => openPromo(true)}>Promo</button>
 
             <div className={styles.mobileMenuFooter}>
-              <Link href="/stores" onClick={closePanels}>
+              <Link href="/#showroom" onClick={closePanels}>
                 Cari Toko
               </Link>
 

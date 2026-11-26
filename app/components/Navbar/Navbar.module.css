@@ -288,75 +288,13 @@
 }
 
 .navLink:hover,
-.navDropdown[open] > .navLink {
+.megaDropdown[open] > .navLink {
   color: var(--blue);
 }
 
 /* =========================================
    DROPDOWN
 ========================================= */
-
-.navDropdown {
-  position: relative;
-
-  display: flex;
-  align-items: center;
-
-  height: 100%;
-}
-
-.navDropdown summary {
-  list-style: none;
-}
-
-.navDropdown summary::-webkit-details-marker {
-  display: none;
-}
-
-.dropdownPanel {
-  position: absolute;
-  top: calc(100% - 1px);
-  left: -20px;
-  z-index: 20;
-
-  display: flex;
-  flex-direction: column;
-
-  width: 270px;
-  padding: 10px;
-
-  background: #ffffff;
-
-  border: 1px solid rgba(15, 44, 60, 0.1);
-  border-radius: 0 0 10px 10px;
-
-  box-shadow: 0 16px 32px rgba(15, 44, 60, 0.1);
-}
-
-.dropdownLink {
-  display: flex;
-  align-items: center;
-
-  min-height: 44px;
-  padding: 10px 12px;
-
-  border-radius: 6px;
-
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.4;
-
-  color: var(--navy);
-
-  transition:
-    background-color var(--transition),
-    color var(--transition);
-}
-
-.dropdownLink:hover {
-  background: #f3f6f8;
-  color: var(--blue);
-}
 
 /* =========================================
    IKON KANAN
@@ -897,3 +835,50 @@
     transition: none !important;
   }
 }
+
+.megaDropdown {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.megaDropdown summary { list-style: none; }
+.megaDropdown summary::-webkit-details-marker { display: none; }
+.megaPanel {
+  position: absolute;
+  inset: calc(var(--announcement-height) + var(--navbar-height) - 1px) auto auto 50%;
+  z-index: 24;
+  display: grid;
+  grid-template-columns: minmax(0, 1.22fr) minmax(0, .88fr) minmax(0, 2fr);
+  gap: clamp(15px, 2.1vw, 36px);
+  width: min(calc(100% - 2 * var(--page-gutter)), 1040px);
+  padding: 24px clamp(22px, 3.4vw, 50px);
+  border-radius: 0 0 18px 18px;
+  background: #fdfefe;
+  box-shadow: 0 16px 36px rgb(15 44 60 / 20%);
+  transform: translateX(-50%);
+}
+.megaPanel[data-compact="true"] {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  width: min(calc(100% - 2 * var(--page-gutter)), 800px);
+}
+.megaHeading { margin: 5px 0 10px; font-size: 17px; font-weight: 750; }
+.megaGroup ul { margin: 0; padding: 0; list-style: none; }
+.megaLink {
+  display: flex;
+  align-items: center;
+  min-height: 46px;
+  padding-block: 5px;
+  font-size: clamp(14px, 1.22vw, 17px);
+  line-height: 1.25;
+}
+.megaLink:hover { color: var(--blue); text-decoration: underline; text-underline-offset: 4px; }
+.megaImage {
+  position: relative;
+  min-height: clamp(250px, 21vw, 336px);
+  overflow: hidden;
+  border-radius: 6px;
+  background: #dbe4ea;
+}
+.megaImage img { object-fit: cover; }
+.megaLink:focus-visible, .megaImage:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+.mobileSubmenu .megaGroup + .megaGroup { margin-top: 10px; }

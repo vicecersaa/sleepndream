@@ -1,4 +1,4 @@
-﻿import Catalog from "./Catalog";
+import Catalog from "./Catalog";
 
 export default async function ProductsPage({ searchParams }: PageProps<"/products">) {
   const params = await searchParams;

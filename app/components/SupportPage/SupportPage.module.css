@@ -1,0 +1,45 @@
+.page { background: var(--color-background); color: var(--color-navy); }
+.banner, .contact { background: var(--color-navy); color: #f7fbff; }
+.banner { padding: clamp(28px, 3.2vw, 52px) var(--page-gutter); text-align: center; }
+.banner h1 { margin: 0; color: inherit; font-size: clamp(34px, 4vw, 55px); font-weight: 750; line-height: 1.05; }
+.banner h1 span { display: block; margin-bottom: 5px; font-size: .55em; font-weight: 500; }
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: var(--section-spacing);
+}
+.row + .row { margin-top: 0; }
+.copy { align-self: center; padding: clamp(26px, 4vw, 60px); padding-inline-start: clamp(22px, 3.4vw, 54px); }
+.steps { margin: 0; padding-inline-start: 1.35em; list-style: decimal; }
+.steps li + li { margin-top: 21px; }
+.steps li::marker { font-size: clamp(17px, 1.5vw, 22px); font-weight: 750; }
+.copy h2 { margin: 0 0 7px; color: inherit; font: 700 clamp(18px, 1.55vw, 23px)/1.25 var(--font-body); }
+.copy p, .avoid ul { margin: 0; color: inherit; font-size: clamp(15px, 1.18vw, 18px); line-height: 1.55; }
+.avoid { margin-top: 24px; }
+.avoid ul { padding-inline-start: 1.35em; list-style: disc; }
+.photo { position: relative; min-height: 400px; background: #cbd9e1; }
+.photo img { object-fit: cover; object-position: 68% center; }
+.photo img.bedroom { object-position: center 66%; }
+.alternate .photo { grid-row: 1; grid-column: 1; }
+.contact { margin-top: var(--section-spacing); }
+.contactGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); padding-block: 24px; }
+.whatsapp, .showrooms { padding: clamp(20px, 3vw, 40px); }
+.whatsapp { display: grid; grid-template-columns: clamp(44px, 6vw, 86px) minmax(0, 1fr); align-items: center; gap: 20px; line-height: 1.5; }
+.whatsapp svg { width: 100%; color: var(--color-light-blue); }
+.showrooms { border-inline-start: 1px solid rgb(227 237 244 / 55%); }
+.showrooms p { margin: 0 0 14px; color: inherit; }
+.showrooms ul { margin: 0; padding: 0; list-style: none; }
+.showrooms a { display: flex; align-items: center; gap: 6px; min-height: 34px; color: #a8c9de; }
+.showrooms a:hover, .whatsapp:hover strong { text-decoration: underline; text-underline-offset: 3px; }
+.contact a:focus-visible { outline: 2px solid var(--color-orange); outline-offset: 2px; }
+
+@media (max-width: 767px) {
+  .row, .contactGrid { grid-template-columns: minmax(0, 1fr); }
+  .row + .row { margin-top: 22px; }
+  .copy { padding-inline: 4px; }
+  .photo { min-height: 0; aspect-ratio: 4 / 3; }
+  .alternate .photo { grid-area: auto; }
+  .showrooms { border-inline-start: 0; border-top: 1px solid rgb(227 237 244 / 55%); }
+  .whatsapp, .showrooms { padding-inline: 4px; }
+}

@@ -42,7 +42,7 @@ export default function SeriesSelector() {
       <div className={styles.container}>
         <div className={styles.header}>
           <h2 id="series-title" className={styles.title}>
-            Pilih series yang sesuai untukmu
+            Temukan Seri Kasur Anda
           </h2>
         </div>
 

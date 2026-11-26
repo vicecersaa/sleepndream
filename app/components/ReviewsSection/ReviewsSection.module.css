@@ -5,7 +5,7 @@
 
 .section {
   width: 100%;
-  padding: 0 0 64px;
+  padding-block: var(--section-spacing) 64px;
 
   background: var(--color-background, #e6e6e6);
   color: var(--color-navy, #0f2c3c);
@@ -375,7 +375,7 @@
 
 @media (max-width: 900px) {
   .section {
-    padding: 0 0 60px;
+    padding-bottom: 60px;
   }
 
   .layout {
@@ -419,7 +419,7 @@
 
 @media (max-width: 767px) {
   .section {
-    padding: 0 0 52px;
+    padding-bottom: 52px;
   }
 
   .layout {

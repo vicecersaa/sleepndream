@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { ProductCard, PRODUCTS } from "../components/RecommendedMattresses/RecommendedMattresses";
@@ -28,7 +28,7 @@ function FilterDropdown({ name, options, field, filters }: {
 }) {
   const selected = filters[field];
 
-  return <details className={styles.dropdown} name="catalog-filter"
+  return <details className={styles.dropdown} data-filter={field} name="catalog-filter"
     onBlur={(event) => {
       if (!event.currentTarget.contains(event.relatedTarget)) event.currentTarget.open = false;
     }}
@@ -46,7 +46,7 @@ function FilterDropdown({ name, options, field, filters }: {
       </svg>
     </summary>
     <ul className={styles.options}>
-      {["", ...options].map((value) => <li key={value}>
+      {(selected ? ["", ...options] : options).map((value) => <li key={value}>
         <Link href={catalogUrl({ ...filters, [field]: value })}
           aria-current={selected === value ? "true" : undefined}
           onClick={(event) => {
@@ -64,7 +64,7 @@ function FilterDropdown({ name, options, field, filters }: {
 
 export default function Catalog({ series, material, comfort, query }: Filters) {
   const filters = {
-    series: SERIES.some((entry) => entry.value === series) ? series : "",
+    series: series === "econo" ? "econo" : "chiro",
     material: MATERIALS.includes(material) ? material : "",
     comfort: COMFORTS.includes(comfort) ? comfort : "",
     query: query.trim(),
@@ -76,6 +76,7 @@ export default function Catalog({ series, material, comfort, query }: Filters) {
     (!search || [product.name, product.category, product.description].some((text) => text.toLocaleLowerCase("id").includes(search))),
   );
   const sections = SERIES.filter((entry) => !filters.series || entry.value === filters.series);
+  const nextSeries = SERIES.find((entry) => entry.value !== filters.series);
   const hasResults = sections.some((entry) => items.some((product) => product.series === entry.value));
 
   return <main className={styles.catalog}>
@@ -85,8 +86,8 @@ export default function Catalog({ series, material, comfort, query }: Filters) {
           <Link href={catalogUrl({ ...filters, series: "" })} className={styles.collection}>Koleksi Sleep &amp; Dream</Link>
           {SERIES.map((entry) => (
             <Link className={styles.pill} key={entry.value}
-              href={catalogUrl({ ...filters, series: entry.value })}
-              data-active={entry.value === (filters.series || "chiro")}
+              href={entry.value === filters.series ? catalogUrl(filters) : "/products?series=" + entry.value + "#top"}
+              data-active={entry.value === filters.series}
               aria-current={entry.value === filters.series ? "page" : undefined}
             >{entry.label}</Link>
           ))}
@@ -113,8 +114,13 @@ export default function Catalog({ series, material, comfort, query }: Filters) {
       }) : <div className={styles.empty}>
         <h2>Kasur yang cocok belum ditemukan</h2>
         <p>Coba ganti seri, material, atau tingkat kenyamanannya.</p>
-        <Link href="/products">Lihat semua kasur</Link>
+        <Link href={"/products?series=" + filters.series}>Hapus filter</Link>
       </div>}
+      {nextSeries && <nav className={styles.seriesFooter} aria-label="Koleksi lainnya">
+        <Link className={styles.pill} href={"/products?series=" + nextSeries.value + "#top"}>
+          {nextSeries.label}<span aria-hidden="true">→</span>
+        </Link>
+      </nav>}
     </div>
   </main>;
 }

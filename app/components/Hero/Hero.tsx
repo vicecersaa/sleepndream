@@ -56,7 +56,7 @@ export default function Hero() {
                 </span>
 
                 <h1 id="hero-title" className={styles.title}>
-                  Nyaman Hingga Pagi.
+                  Tidur Nyaman hingga Pagi
                 </h1>
 
                 <p className={styles.description}>

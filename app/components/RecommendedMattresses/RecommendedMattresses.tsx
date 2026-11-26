@@ -502,7 +502,7 @@ export default function RecommendedMattresses() {
             id="recommended-title"
             className={styles.title}
           >
-            Rekomendasi kasur untukmu
+            Pilihan Kasur Sleep & Dream
           </h2>
 
           <div className={styles.categoryFilters} aria-label="Filter kategori kasur">
