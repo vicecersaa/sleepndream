@@ -15,3 +15,5 @@ The Promo navigation button opens a full-image dialog over the current page. The
 The footer uses a two-column newsletter row followed by three navigation groups and a contact column. On phones the signup stacks and the links use two columns.
 
 Support pages use a navy title band, alternating image and copy panels, and a shared contact strip linking to WhatsApp and the showrooms.
+
+Display headings load the self-hosted Bricolage Grotesque variable font. Desktop mega-menu images fade to the selected item on hover or keyboard focus.

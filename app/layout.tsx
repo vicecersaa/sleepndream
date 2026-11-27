@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import PromoModal from "./components/PromoModal/PromoModal";
 import WhatsAppButton from "./components/WhatsAppButton/WhatsAppButton";
+import "@fontsource-variable/bricolage-grotesque";
 import "./globals.css";
 
 export const metadata: Metadata = {

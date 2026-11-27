@@ -273,6 +273,7 @@
 
   border: 0;
   background: transparent;
+  font-family: var(--font-display);
 
   font-size: 15px;
   font-weight: 500;
@@ -880,5 +881,11 @@
   background: #dbe4ea;
 }
 .megaImage img { object-fit: cover; }
+.hoverArtwork { opacity: 0; }
+.hoverArtwork[data-loaded="true"] { animation: hover-artwork-in 220ms ease-out both; }
+@keyframes hover-artwork-in { to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .hoverArtwork[data-loaded="true"] { animation: none; opacity: 1; }
+}
 .megaLink:focus-visible, .megaImage:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
 .mobileSubmenu .megaGroup + .megaGroup { margin-top: 10px; }

@@ -18,21 +18,21 @@ const MATTRESS_GROUPS = [
   {
     title: "Jenis",
     items: [
-      { label: "Kasur Set", href: inquire("kasur set") },
-      { label: "Kasur", href: "/products" },
-      { label: "Headboard", href: inquire("headboard") },
-      { label: "Dipan", href: inquire("dipan") },
-      { label: "Custom Kasur (Konsultasi)", href: inquire("kasur custom") },
+      { label: "Kasur Set", image: "/images/featured-bedroom-set.jpg", href: inquire("kasur set") },
+      { label: "Kasur", image: "/images/featured-mattress.jpg", href: "/products" },
+      { label: "Headboard", image: "/images/featured-bed-frame.jpg", href: inquire("headboard") },
+      { label: "Dipan", image: "/images/quality-blue-bedroom.jpg", href: inquire("dipan") },
+      { label: "Custom Kasur (Konsultasi)", image: "/images/hero/hero-sleepndream.png", href: inquire("kasur custom") },
     ],
   },
   {
     title: "Kenyamanan",
     items: [
-      { label: "Soft", href: "/products?comfort=Soft" },
-      { label: "Medium Soft", href: "/products?series=econo&comfort=Soft+Medium" },
-      { label: "Medium Firm", href: "/products?comfort=Medium+Firm" },
-      { label: "Firm", href: "/products?comfort=Firm" },
-      { label: "Extra Firm", href: "/products?comfort=Extra+Firm" },
+      { label: "Soft", image: "/images/featured-bedding.jpg", href: "/products?comfort=Soft" },
+      { label: "Medium Soft", image: "/images/featured-bedroom-set.jpg", href: "/products?series=econo&comfort=Soft+Medium" },
+      { label: "Medium Firm", image: "/images/featured-mattress.jpg", href: "/products?comfort=Medium+Firm" },
+      { label: "Firm", image: "/images/featured-bed-frame.jpg", href: "/products?comfort=Firm" },
+      { label: "Extra Firm", image: "/images/quality-blue-bedroom.jpg", href: "/products?comfort=Extra+Firm" },
     ],
   },
 ];
@@ -40,9 +40,9 @@ const MATTRESS_GROUPS = [
 const BEDDING_GROUPS = [{
   title: "Jenis",
   items: [
-    { label: "Bantal", href: "/#aksesori-bantal" },
-    { label: "Guling", href: "/#aksesori-guling" },
-    { label: "Bed Cover", href: "/#aksesori-bed-cover" },
+    { label: "Bantal", image: "/images/featured-pillows.jpg", href: "/#aksesori-bantal" },
+    { label: "Guling", image: "/images/featured-accessories.jpg", href: "/#aksesori-guling" },
+    { label: "Bed Cover", image: "/images/featured-bedding.jpg", href: "/#aksesori-bed-cover" },
   ],
 }];
 
@@ -51,21 +51,52 @@ const MEGA_MENUS = [
   { label: "Perlengkapan Tidur", groups: BEDDING_GROUPS, href: "/#accessories-title", image: "/images/featured-bedding.jpg" },
 ];
 
-function MegaGroups({ groups, onNavigate }: { groups: typeof MATTRESS_GROUPS; onNavigate: () => void }) {
+type MenuItem = (typeof MATTRESS_GROUPS)[number]["items"][number];
+
+function MegaGroups({ groups, onNavigate, onPreview }: {
+  groups: typeof MATTRESS_GROUPS;
+  onNavigate: () => void;
+  onPreview?: (item: MenuItem) => void;
+}) {
   return groups.map(({ title, items }) => (
     <div className={styles.megaGroup} key={title}>
       <p className={styles.megaHeading}>{title}</p>
       <ul>
-        {items.map(({ label, href }) => (
-          <li key={label}>
-            {href.startsWith("/#aksesori-")
-              ? <a className={styles.megaLink} href={href} onClick={onNavigate}>{label}</a>
-              : <Link className={styles.megaLink} href={href} onClick={onNavigate}>{label}</Link>}
+        {items.map((item) => (
+          <li key={item.label} onPointerEnter={onPreview ? (event) => { if (event.pointerType === "mouse") onPreview(item); } : undefined} onFocus={onPreview ? () => onPreview(item) : undefined}>
+            {item.href.startsWith("/#aksesori-")
+              ? <a className={styles.megaLink} href={item.href} onClick={onNavigate}>{item.label}</a>
+              : <Link className={styles.megaLink} href={item.href} onClick={onNavigate}>{item.label}</Link>}
           </li>
         ))}
       </ul>
     </div>
   ));
+}
+
+function MegaPreview({ menu, item, onNavigate }: {
+  menu: (typeof MEGA_MENUS)[number];
+  item?: MenuItem;
+  onNavigate: () => void;
+}) {
+  const href = item?.href ?? menu.href;
+  const label = item?.label ?? "Lihat koleksi " + menu.label.toLowerCase();
+  const images = <>
+    <Image src={menu.image} alt="" fill sizes="(min-width: 1200px) 440px, 40vw" />
+    {item && <Image
+      key={item.image}
+      className={styles.hoverArtwork}
+      src={item.image}
+      alt=""
+      fill
+      sizes="(min-width: 1200px) 440px, 40vw"
+      onLoad={(event) => { event.currentTarget.dataset.loaded = "true"; }}
+    />}
+  </>;
+
+  return href.startsWith("/#aksesori-")
+    ? <a href={href} className={styles.megaImage} aria-label={label} onClick={onNavigate}>{images}</a>
+    : <Link href={href} className={styles.megaImage} aria-label={label} onClick={onNavigate}>{images}</Link>;
 }
 
 /* =========================================
@@ -189,6 +220,7 @@ export default function Navbar() {
   const router = useRouter();
 
   const desktopNav = useRef<HTMLElement>(null);
+  const [preview, setPreview] = useState<{ menu: string; item: MenuItem } | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -392,6 +424,9 @@ export default function Navbar() {
             >
               {MEGA_MENUS.map((menu) => (
                 <details key={menu.label} name="sleepndream-mega-menu" className={styles.megaDropdown}
+                  onToggle={(event) => {
+                    if (!event.currentTarget.open) setPreview((current) => current?.menu === menu.label ? null : current);
+                  }}
                   onPointerEnter={(event) => { if (event.pointerType === "mouse") event.currentTarget.open = true; }}
                   onPointerLeave={(event) => {
                     if (event.pointerType === "mouse" && !event.currentTarget.contains(document.activeElement)) event.currentTarget.open = false;
@@ -408,10 +443,8 @@ export default function Navbar() {
                 >
                   <summary className={styles.navLink}>{menu.label}</summary>
                   <div className={styles.megaPanel} data-compact={menu.groups.length === 1}>
-                    <MegaGroups groups={menu.groups} onNavigate={closePanels} />
-                    <Link href={menu.href} className={styles.megaImage} aria-label={"Lihat koleksi " + menu.label.toLowerCase()} onClick={closePanels}>
-                      <Image src={menu.image} alt="" fill sizes="(min-width: 1200px) 440px, 40vw" />
-                    </Link>
+                    <MegaGroups groups={menu.groups} onNavigate={closePanels} onPreview={(item) => setPreview({ menu: menu.label, item })} />
+                    <MegaPreview menu={menu} item={preview?.menu === menu.label ? preview.item : undefined} onNavigate={closePanels} />
                   </div>
                 </details>
               ))}
